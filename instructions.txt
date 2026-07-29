@@ -1,0 +1,21 @@
+export https_proxy="http://147.161.160.200:443"
+curl -v wikipedia.com
+
+/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary --user-data-dir="/tmp/canary_test_profile" --host-rules="MAP wikitest.com 127.0.0.1"
+
+NEW
+___________________________________________
+export http_proxy=http://127.0.0.1:80
+export https_proxy=http://127.0.0.1:80
+export no_proxy=
+python3 -m http.server 80   OR   python3 proxy.py
+
+
+export http_proxy=http://127.0.0.1:80
+export https_proxy=http://127.0.0.1:80
+export no_proxy=127.0.0.1,localhost
+export OLLAMA_HOST=http://127.0.0.1:11500
+python app.py
+
+export OLLAMA_HOST=http://127.0.0.1:11500
+ollama serve
