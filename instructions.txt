@@ -19,3 +19,8 @@ python app.py
 
 export OLLAMA_HOST=http://127.0.0.1:11500
 ollama serve
+
+
+pyinstaller --onefile --name=giskard-v2.10.1 --strip --noupx skill_optimizer.py && codesign --sign - dist/giskard-v2.10.1
+
+nuitka --onefile --standalone --onefile-no-compression --output-filename=giskard-v2.10.1 skill_optimizer.py && codesign --sign - giskard-v2.10.1

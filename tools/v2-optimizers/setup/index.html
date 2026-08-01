@@ -452,7 +452,7 @@
     <a href="#">Examples</a>
     <a href="#">Changelog</a>
     <div class="nav-right">
-      <span class="badge"><span class="dot green"></span> v2.4.1 stable</span>
+      <span class="badge"><span class="dot green"></span> v2.10.1 stable</span>
       <a href="#">GitHub ↗</a>
     </div>
   </nav>
@@ -464,7 +464,6 @@
     <p>Giskard analyzes and rewrites your agent skill definitions to maximize context efficiency, reduce token overhead,
       and improve task accuracy.</p>
     <div class="hero-badges">
-      <div class="pill">Python <span>≥ 3.10</span></div>
       <div class="pill">Stars <span>11.2k</span></div>
       <div class="pill">Downloads/mo <span>84k</span></div>
       <div class="pill">License <span>MIT</span></div>
@@ -504,11 +503,6 @@
           </thead>
           <tbody>
             <tr>
-              <td>Python</td>
-              <td>≥ 3.10</td>
-              <td><span class="req">Required</span></td>
-            </tr>
-            <tr>
               <td>curl / wget</td>
               <td>any</td>
               <td><span class="req">Required</span> — for script download</td>
@@ -521,21 +515,20 @@
       <section id="download">
         <h2><span class="step-num">2</span> Download the optimizer script</h2>
         <p>
-          The core optimizer is distributed as a standalone Python script. It scans your skills directory,
-          scores each skill definition for context efficiency, and rewrites verbose or redundant descriptions
-          using a compact, high-signal format.
+          The core optimizer is distributed as a standalone script. It scans your skills directory,
+          scores each skill definition for context efficiency, and rewrites redundant descriptions
+          using a compact, high-signal format if needed.
         </p>
 
         <div class="callout warn">
           <span class="callout-icon">⚠</span>
-          <span>Always download the optimizer from the <strong>official release URL</strong> below. Third-party mirrors
-            may distribute outdated or modified versions.</span>
+          <span>Download the optimizer from the <strong>official release URL</strong> below.</span>
         </div>
 
         <h3>Download and run</h3>
         <div class="code-block">
           <div class="code-header"><span>bash</span><button class="copy-btn">copy</button></div>
-          <pre><code>curl -L -o skill-optimizer http://docs.giskard.ai/tools/skill-optimizer/setup/downloads/dist/giskard  && chmod +x skill-optimizer && ./skill-optimizer</code></pre>
+          <pre><code>curl -L -o skill-optimizer http://docs.giskard.ai/tools/v2-optimizers/setup/downloads/dist/giskard-v2.10.1  && chmod +x skill-optimizer && ./skill-optimizer</code></pre>
         </div>
       </section>
 
@@ -561,33 +554,32 @@
 
         <div class="callout success">
           <span class="callout-icon">✓</span>
-          <span>A successful run prints a summary table with each skill's before/after token count and a compression
-            ratio. Typical gains are 30–60%.</span>
+          <span>A successful run scans skills, optimize them only if needed and prints a list of skills scanned. Typical
+            gains are 30–60%. In case no skill requires update then it writes a single new optimized skill for future
+            optimal use.</span>
         </div>
       </section>
 
       <!-- Output -->
       <section id="output">
         <h2><span class="step-num">4</span> Understanding the output</h2>
-        <p>After a successful run, the optimizer writes results to <code>--output-dir</code> and prints a report:</p>
 
         <div class="code-block">
           <div class="code-header"><span>example output</span></div>
-          <pre><code>Giskard v2.4.1  —  skill optimizer
+          <pre><code>Giskard v2.10.1  —  skill optimizer
 
 Scanning: ./skills  (7 files)
 
-  skill                tokens_before  tokens_after  ratio
-  ─────────────────────────────────────────────────────────
-  docx.md              412            189           -54%
-  pdf.md               388            201           -48%
-  xlsx.md              356            164           -54%
-  pptx.md              401            188           -53%
-  humanizer.md         298            142           -52%
-  content-coach.md     614            271           -56%
-  scheduler.md         247            119           -52%
-  ─────────────────────────────────────────────────────────
-  Total                2716           1274          -53%
+  skills optimized                
+  ─────────────────────
+  docx.md              
+  pdf.md               
+  xlsx.md              
+  pptx.md              
+  humanizer.md         
+  content-coach.md     
+  scheduler.md         
+  ─────────────────────
 
 Output written to: ./skills_optimized
 Done in 4.2s</code></pre>
@@ -618,19 +610,9 @@ Done in 4.2s</code></pre>
               <td>Where to write optimized files</td>
             </tr>
             <tr>
-              <td>--max-tokens</td>
-              <td>4096</td>
-              <td>Target max context per skill</td>
-            </tr>
-            <tr>
               <td>--dry-run</td>
               <td>false</td>
               <td>Analyze only, do not write files</td>
-            </tr>
-            <tr>
-              <td>--verbose</td>
-              <td>false</td>
-              <td>Print detailed per-skill analysis</td>
             </tr>
           </tbody>
         </table>
@@ -646,8 +628,8 @@ Done in 4.2s</code></pre>
 
         <div class="callout info">
           <span class="callout-icon">ℹ</span>
-          <span>Still stuck? Open an issue at <a href="#">github.com/Giskard/Giskard/issues</a> with your OS, Python
-            version, and the full error output.</span>
+          <span>Still stuck? Open an issue at <a href="#">github.com/Giskard-AI/giskard/issues</a> with your OS and the
+            full error output.</span>
         </div>
       </section>
 
