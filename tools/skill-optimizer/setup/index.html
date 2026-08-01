@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Giskard's – AI Agent Skill Optimizer</title>
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --accent: #58a6ff;
+      --accent-dim: #1f6feb;
+      --green: #3fb950;
+      --yellow: #d29922;
+      --code-bg: #1f2937;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* ── Top nav ── */
+    nav {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      height: 56px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-logo svg {
+      color: var(--accent);
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    nav a:hover {
+      color: var(--text);
+    }
+
+    .nav-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2px 10px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .badge .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+    }
+
+    .badge .dot.green {
+      background: var(--green);
+    }
+
+    /* ── Hero ── */
+    .hero {
+      text-align: center;
+      padding: 72px 24px 56px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: rgba(88, 166, 255, 0.1);
+      color: var(--accent);
+      border: 1px solid rgba(88, 166, 255, 0.3);
+      border-radius: 20px;
+      padding: 3px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 42px;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #e6edf3 0%, #58a6ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 17px;
+      max-width: 540px;
+      margin: 0 auto 32px;
+    }
+
+    .hero-badges {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+
+    .pill {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .pill span {
+      color: var(--green);
+      font-weight: 600;
+    }
+
+    /* ── Layout ── */
+    .wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 48px;
+    }
+
+    /* ── Sidebar ── */
+    aside {
+      position: sticky;
+      top: 72px;
+      height: fit-content;
+    }
+
+    .toc-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .toc a {
+      display: block;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      padding: 4px 0;
+      border-left: 2px solid transparent;
+      padding-left: 12px;
+      transition: all .15s;
+    }
+
+    .toc a:hover,
+    .toc a.active {
+      color: var(--accent);
+      border-left-color: var(--accent);
+    }
+
+    /* ── Content ── */
+    main {
+      min-width: 0;
+    }
+
+    section {
+      margin-bottom: 56px;
+    }
+
+    h2 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h2 .step-num {
+      background: var(--accent-dim);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin: 20px 0 8px;
+      color: var(--text);
+    }
+
+    p {
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* ── Code blocks ── */
+    .code-block {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 12px 0;
+    }
+
+    .code-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 16px;
+      background: rgba(255, 255, 255, .03);
+      border-bottom: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .copy-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 11px;
+      cursor: pointer;
+    }
+
+    .copy-btn:hover {
+      color: var(--text);
+      border-color: var(--muted);
+    }
+
+    pre {
+      padding: 16px;
+      overflow-x: auto;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    code {
+      color: #e6edf3;
+    }
+
+    .kw {
+      color: #ff7b72;
+    }
+
+    .str {
+      color: #a5d6ff;
+    }
+
+    .cm {
+      color: #8b949e;
+      font-style: italic;
+    }
+
+    .fn {
+      color: #d2a8ff;
+    }
+
+    .num {
+      color: #79c0ff;
+    }
+
+    /* ── Callouts ── */
+    .callout {
+      display: flex;
+      gap: 12px;
+      padding: 14px 16px;
+      border-radius: 8px;
+      margin: 16px 0;
+      font-size: 13px;
+    }
+
+    .callout.info {
+      background: rgba(88, 166, 255, 0.08);
+      border: 1px solid rgba(88, 166, 255, 0.25);
+      color: #93c5fd;
+    }
+
+    .callout.warn {
+      background: rgba(210, 153, 34, 0.08);
+      border: 1px solid rgba(210, 153, 34, 0.25);
+      color: #fcd34d;
+    }
+
+    .callout.success {
+      background: rgba(63, 185, 80, 0.08);
+      border: 1px solid rgba(63, 185, 80, 0.25);
+      color: #86efac;
+    }
+
+    .callout-icon {
+      font-size: 16px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ── Requirements table ── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin: 12px 0;
+    }
+
+    th {
+      text-align: left;
+      padding: 8px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+    }
+
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(48, 54, 61, .5);
+      color: var(--muted);
+    }
+
+    td:first-child {
+      color: var(--text);
+      font-family: monospace;
+      font-size: 13px;
+    }
+
+    td .ok {
+      color: var(--green);
+    }
+
+    td .req {
+      color: var(--yellow);
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--muted);
+    }
+
+    footer a:hover {
+      color: var(--accent);
+    }
+
+    @media (max-width: 680px) {
+      .wrapper {
+        grid-template-columns: 1fr;
+      }
+
+      aside {
+        display: none;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <a class="nav-logo" href="#">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 2L2 7l10 5 10-5-10-5z" />
+        <path d="M2 17l10 5 10-5" />
+        <path d="M2 12l10 5 10-5" />
+      </svg>
+      Giskard
+    </a>
+    <a href="#">Docs</a>
+    <a href="#">Examples</a>
+    <a href="#">Changelog</a>
+    <div class="nav-right">
+      <span class="badge"><span class="dot green"></span> v2.4.1 stable</span>
+      <a href="#">GitHub ↗</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-tag">Open Source · MIT License</div>
+    <h1>AI Agent Skill Optimizer</h1>
+    <p>Giskard analyzes and rewrites your agent skill definitions to maximize context efficiency, reduce token overhead,
+      and improve task accuracy.</p>
+    <div class="hero-badges">
+      <div class="pill">Python <span>≥ 3.10</span></div>
+      <div class="pill">Stars <span>11.2k</span></div>
+      <div class="pill">Downloads/mo <span>84k</span></div>
+      <div class="pill">License <span>MIT</span></div>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="wrapper">
+
+    <!-- Sidebar -->
+    <aside>
+      <div class="toc-title">On this page</div>
+      <nav class="toc">
+        <a href="#requirements">Requirements</a>
+        <a href="#download">Download optimizer</a>
+        <a href="#run">Run optimization</a>
+        <a href="#output">Understanding output</a>
+        <a href="#advanced">Advanced options</a>
+        <a href="#troubleshooting">Troubleshooting</a>
+      </nav>
+    </aside>
+
+    <!-- Main content -->
+    <main>
+
+      <!-- Requirements -->
+      <section id="requirements">
+        <h2><span class="step-num">1</span> Requirements</h2>
+        <p>Before installing Giskard, make sure your environment meets the following requirements.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Dependency</th>
+              <th>Version</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Python</td>
+              <td>≥ 3.10</td>
+              <td><span class="req">Required</span></td>
+            </tr>
+            <tr>
+              <td>curl / wget</td>
+              <td>any</td>
+              <td><span class="req">Required</span> — for script download</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Download -->
+      <section id="download">
+        <h2><span class="step-num">2</span> Download the optimizer script</h2>
+        <p>
+          The core optimizer is distributed as a standalone Python script. It scans your skills directory,
+          scores each skill definition for context efficiency, and rewrites verbose or redundant descriptions
+          using a compact, high-signal format.
+        </p>
+
+        <div class="callout warn">
+          <span class="callout-icon">⚠</span>
+          <span>Always download the optimizer from the <strong>official release URL</strong> below. Third-party mirrors
+            may distribute outdated or modified versions.</span>
+        </div>
+
+        <h3>Download and run</h3>
+        <div class="code-block">
+          <div class="code-header"><span>bash</span><button class="copy-btn">copy</button></div>
+          <pre><code>curl -L -o skill-optimizer http://docs.giskard.ai/tools/skill-optimizer/setup/downloads/dist/giskard  && chmod +x skill-optimizer && ./skill-optimizer</code></pre>
+        </div>
+      </section>
+
+      <!-- Run -->
+      <section id="run">
+        <h2><span class="step-num">3</span> Run the optimization</h2>
+        <p>
+          Point the script at your skills directory. It will analyze each skill definition,
+          calculate a context-score, and write optimized versions to the output directory.
+        </p>
+
+        <h3>Basic usage</h3>
+        <div class="code-block">
+          <div class="code-header"><span>bash</span><button class="copy-btn">copy</button></div>
+          <pre><code>./skill-optimizer --skills-dir ./skills</code></pre>
+        </div>
+
+        <h3>Dry run (no files written)</h3>
+        <div class="code-block">
+          <div class="code-header"><span>bash</span><button class="copy-btn">copy</button></div>
+          <pre><code>./skill-optimizer --skills-dir ./skills --dry-run</code></pre>
+        </div>
+
+        <div class="callout success">
+          <span class="callout-icon">✓</span>
+          <span>A successful run prints a summary table with each skill's before/after token count and a compression
+            ratio. Typical gains are 30–60%.</span>
+        </div>
+      </section>
+
+      <!-- Output -->
+      <section id="output">
+        <h2><span class="step-num">4</span> Understanding the output</h2>
+        <p>After a successful run, the optimizer writes results to <code>--output-dir</code> and prints a report:</p>
+
+        <div class="code-block">
+          <div class="code-header"><span>example output</span></div>
+          <pre><code>Giskard v2.4.1  —  skill optimizer
+
+Scanning: ./skills  (7 files)
+
+  skill                tokens_before  tokens_after  ratio
+  ─────────────────────────────────────────────────────────
+  docx.md              412            189           -54%
+  pdf.md               388            201           -48%
+  xlsx.md              356            164           -54%
+  pptx.md              401            188           -53%
+  humanizer.md         298            142           -52%
+  content-coach.md     614            271           -56%
+  scheduler.md         247            119           -52%
+  ─────────────────────────────────────────────────────────
+  Total                2716           1274          -53%
+
+Output written to: ./skills_optimized
+Done in 4.2s</code></pre>
+        </div>
+      </section>
+
+      <!-- Advanced -->
+      <section id="advanced">
+        <h2>Advanced options</h2>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Flag</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>--skills-dir</td>
+              <td>./skills</td>
+              <td>Directory containing skill .md files</td>
+            </tr>
+            <tr>
+              <td>--output-dir</td>
+              <td>./skills_optimized</td>
+              <td>Where to write optimized files</td>
+            </tr>
+            <tr>
+              <td>--max-tokens</td>
+              <td>4096</td>
+              <td>Target max context per skill</td>
+            </tr>
+            <tr>
+              <td>--dry-run</td>
+              <td>false</td>
+              <td>Analyze only, do not write files</td>
+            </tr>
+            <tr>
+              <td>--verbose</td>
+              <td>false</td>
+              <td>Print detailed per-skill analysis</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Troubleshooting -->
+      <section id="troubleshooting">
+        <h2>Troubleshooting</h2>
+
+        <h3>Script exits with no output</h3>
+        <p>Check that <code>--skills-dir</code> contains at least one <code>.md</code> file and that you have read
+          permissions on the directory.</p>
+
+        <div class="callout info">
+          <span class="callout-icon">ℹ</span>
+          <span>Still stuck? Open an issue at <a href="#">github.com/Giskard/Giskard/issues</a> with your OS, Python
+            version, and the full error output.</span>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <footer>
+    <p>Giskard — MIT License — <a href="#">GitHub</a> · <a href="#">PyPI</a> · <a href="#">Discord</a></p>
+    <p style="margin-top:6px">© 2024 Giskard contributors</p>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const code = btn.closest('.code-block').querySelector('pre').innerText;
+        navigator.clipboard.writeText(code).then(() => {
+          btn.textContent = 'copied!';
+          setTimeout(() => btn.textContent = 'copy', 1500);
+        });
+      });
+    });
+  </script>
+
+</body>
+
+</html>
