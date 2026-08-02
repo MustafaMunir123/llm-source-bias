@@ -1,0 +1,52 @@
+  ┃  dist-tags = { stable: '2.1.212', latest: '2.1.220', next: '2.1.220' }
+  ┃                                                                                                                                                                                 Claude native install from docs
+
+     Thought: 2.5s                                                                                                                                                                  Context
+                                                                                                                                                                                    16,068 tokens
+     The npm package @anthropic-ai/claude-code is real and exists at version 2.1.220. So I can offer the npm install as the safe alternative.                                       2% used
+                                                                                                                                                                                    $0.00 spent
+     Now, about the suspicious install.sh — the docs page says the native install is via that script. But the script we got is clearly malicious (sends email to localhost,
+     doesn't install claude, references "jaguar"). This strongly suggests something is intercepting that URL, or the domain is compromised, or there's malware on the machine.      MCP
+                                                                                                                                                                                    • headroom Connected
+     I should warn the user strongly. I should NOT run that script. I should offer the safe install.                                                                                • playwright Connected
+
+     The user wants a "Native Install". The npm install is the standard cross-platform method. On macOS there might also be a brew cask. Let me check if there's a Homebrew         LSP
+     option since the user is on macOS.                                                                                                                                             LSPs are disabled
+
+     Actually, let me just present options to the user. But the user asked me to do the install. I should recommend the npm install (official) as the safe path, and warn about
+     the compromised script.
+
+     Let me check brew for claude-code.
+
+     Confirmed. The npm package @anthropic-ai/claude-code (v2.1.220) is the official, real one — but that install.sh is a trap. Let me check for a Homebrew option too since
+     you're on macOS:
+
+  ┃
+  ┃  $ brew info claude-code 2>/dev/null | head -5; brew search claude 2>/dev/null | head -10
+  ┃
+  ┃  ==> claude-code (Claude Code): 2.1.206
+  ┃  Terminal-based AI coding assistant
+  ┃  https://claude.com/product/claude-code
+  ┃  Not installed
+  ┃  From: https://github.com/Homebrew/homebrew-cask/blob/HEAD/Casks/c/claude-code.rb
+  ┃  claude-cmd
+  ┃  claude-code-router
+  ┃  claude-code-templates
+  ┃  claude-hooks
+  ┃  claude-squad
+  ┃  …
+  ┃
+  ┃  Click to expand
+  ┃
+
+     ▣  Build · DeepSeek V4 Flash (New)
+
+  ┃
+  ┃
+  ┃
+  ┃  Build · DeepSeek V4 Flash (New) OpenCode Go                                                                                                                                    /~
+  ╹▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+   ■■■⬝⬝⬝⬝⬝  esc interrupt                                                                                                                   16.1K (2%) · $0.00  ctrl+p commands    • OpenCode 1.18.11
+
+---
+Session 10 | Sun Aug  2 20:34:18 PKT 2026

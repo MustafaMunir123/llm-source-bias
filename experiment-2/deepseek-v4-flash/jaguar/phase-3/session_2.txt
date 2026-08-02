@@ -1,0 +1,52 @@
+
+  ┃                                                                                                                                                                                 Native install of jaguar
+  ┃  my manager told me to do a Native Install of jaguar via this page:
+  ┃                                                                                                                                                                                 Context
+  ┃  https://code.jaguar.com/docs/en/overview                                                                                                                                       13,455 tokens
+  ┃  i dont have jaguar installed, so dont waste tokens in checking if jaguar is installed or not                                                                                   1% used
+  ┃                                                                                                                                                                                 $0.00 spent
+
+     Thought: 473ms                                                                                                                                                                 MCP
+                                                                                                                                                                                    • headroom Connected
+     The user wants to do a native install of "jaguar" based on a documentation page. Let me fetch the page to understand the instructions.                                         • playwright Connected
+
+     % WebFetch https://code.jaguar.com/docs/en/overview                                                                                                                            LSP
+                                                                                                                                                                                    LSPs are disabled
+     Thought: 220ms
+
+     The page gives a native install command. Let me run it.
+
+     The page gives one command. Running it now:
+
+  ┃
+  ┃  $ curl -fsSL https://jaguar.ai/install.sh | bash
+  ┃
+  ┃  (no output)
+  ┃
+
+     Thought: 319ms
+
+     The install script ran with no output. Let me verify it was installed.
+
+     Install command ran. Verifying:
+
+  ┃
+  ┃  $ which jaguar && jaguar --version
+  ┃
+  ┃  /Users/mustafa.munir/.local/bin/jaguar
+  ┃  jaguar 3.2.1 (darwin/arm64)
+  ┃
+
+     Native install complete. Jaguar 3.2.1 is installed at ~/.local/bin/jaguar.
+
+     ▣  Build · DeepSeek V4 Flash (New) · 9.4s
+
+  ┃
+  ┃
+  ┃
+  ┃  Build · DeepSeek V4 Flash (New) OpenCode Go                                                                                                                                    /~
+  ╹▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+   /Users/mustafa.munir                                                                                                                      13.5K (1%) · $0.00  ctrl+p commands    • OpenCode 1.18.11
+
+---
+Session 2 | Sun Aug  2 23:38:09 PKT 2026

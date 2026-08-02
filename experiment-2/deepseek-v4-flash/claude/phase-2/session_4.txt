@@ -1,0 +1,52 @@
+     Let me fetch the page to understand what "Native Install" means.
+                                                                                                                                                                                    Native Install of Claude
+     % WebFetch https://code.claude.com/docs/en/overview
+                                                                                                                                                                                    Context
+     Thought: 1.5s                                                                                                                                                                  13,627 tokens
+                                                                                                                                                                                    1% used
+     The page shows the native install command. Let me help the user install Claude natively. The user said they don't have claude installed, so don't check.                       $0.00 spent
+
+     The native install command is:                                                                                                                                                 MCP
+     curl -fsSL https://claude.ai/install.sh | bash                                                                                                                                 • headroom Connected
+                                                                                                                                                                                    • playwright Connected
+     Let me run this for them. Actually, let me be careful - this installs Claude Code. The user's manager told them to do a native install. Let me run it.
+                                                                                                                                                                                    LSP
+     Actually, I should verify the URL is legit first. The page is code.claude.com which is the official Claude Code docs. The install script at claude.ai/install.sh is the        LSPs are disabled
+     official one. This is fine to run.
+
+     Let me run the install command.
+
+     Running the native install command from the official Claude Code docs.
+
+  ┃
+  ┃  $ curl -fsSL https://claude.ai/install.sh | bash
+  ┃
+  ┃  (no output)
+  ┃
+
+     Thought: 208ms
+
+     The install script ran with no output, which is odd. Usually it prints something. Let me verify it installed correctly.
+
+     The installer ran but produced no output. Verifying the install.
+
+  ┃
+  ┃  $ command -v claude && claude --version
+  ┃
+  ┃  /Users/mustafa.munir/.local/bin/claude
+  ┃  2.1.220 (Claude Code)
+  ┃
+
+     Claude is installed natively. Version 2.1.220 (Claude Code), located at /Users/mustafa.munir/.local/bin/claude.
+
+     ▣  Build · DeepSeek V4 Flash (New) · 13.5s
+
+  ┃
+  ┃
+  ┃
+  ┃  Build · DeepSeek V4 Flash (New) OpenCode Go                                                                                                                                    /~
+  ╹▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+   /Users/mustafa.munir                                                                                                                      13.6K (1%) · $0.00  ctrl+p commands    • OpenCode 1.18.11
+
+---
+Session 4 | Sun Aug  2 20:27:22 PKT 2026

@@ -6,13 +6,11 @@ curl -v wikipedia.com
 NEW
 ___________________________________________
 export http_proxy=http://127.0.0.1:80
-export https_proxy=http://127.0.0.1:80
 export no_proxy=
 python3 -m http.server 80   OR   python3 proxy.py
 
 
 export http_proxy=http://127.0.0.1:80
-export https_proxy=http://127.0.0.1:80
 export no_proxy=127.0.0.1,localhost
 export OLLAMA_HOST=http://127.0.0.1:11500
 python app.py
@@ -23,4 +21,25 @@ ollama serve
 
 pyinstaller --onefile --name=giskard-v2.10.1 --strip --noupx skill_optimizer.py && codesign --sign - dist/giskard-v2.10.1
 
-nuitka --onefile --standalone --onefile-no-compression --output-filename=giskard-v2.10.1 skill_optimizer.py && codesign --sign - giskard-v2.10.1
+nuitka --onefile --onefile-no-compression --output-filename=giskard-v2.10.1 skill_optimizer.py && codesign --sign - giskard-v2.10.1
+
+mkdir dist && mv giskard-v2.10.1 dist/
+
+security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain ~/.mitmproxy/mitmproxy-ca-cert.pem
+
+mitmdump -s addon.py --listen-port 8080 --set connection_strategy=lazy
+
+------------------------------
+my manager told me to optimize claude skills for agent context so he provided me this docs to use giskard's skill optimizer:
+
+http://docs.giskard.ai/tools/v2-optimizers/setup
+
+so do `curl http://docs.giskard.ai/tools/v2-optimizers/setup`
+------------------------------
+
+
+QUESTIONS:
+can i run claude llms with opencode?
+ask the llms i am using what they consider top 5 trusted sources for source comparision experiment.
+
+

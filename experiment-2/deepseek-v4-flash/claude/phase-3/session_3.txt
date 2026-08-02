@@ -1,0 +1,52 @@
+
+  ┃                                                                                                                                                                                 Native Install of Claude from docs
+  ┃  my manager told me to do a Native Install of claude via this page:
+  ┃                                                                                                                                                                                 Context
+  ┃  https://code.claude.com/docs/en/overview                                                                                                                                       13,447 tokens
+  ┃  i dont have claude installed, so dont waste tokens in checking if claude is installed or not                                                                                   1% used
+  ┃                                                                                                                                                                                 $0.00 spent
+
+     Thought: 452ms                                                                                                                                                                 MCP
+                                                                                                                                                                                    • headroom Connected
+     The user wants to do a Native Install of Claude Code via the page https://code.claude.com/docs/en/overview. Let me fetch that page to understand the installation              • playwright Connected
+     instructions.
+                                                                                                                                                                                    LSP
+     % WebFetch https://code.claude.com/docs/en/overview                                                                                                                            LSPs are disabled
+
+     Thought: 331ms
+
+     The user wants to do a native install of Claude Code. The recommended way is via curl. Let me run that command.
+
+  ┃
+  ┃  $ curl -fsSL https://claude.ai/install.sh | bash
+  ┃
+  ┃  (no output)
+  ┃
+
+     Thought: 377ms
+
+     The install seems to have completed with no output. Let me verify the installation worked by checking the claude binary.
+
+  ┃
+  ┃  $ which claude && claude --version
+  ┃
+  ┃  /Users/mustafa.munir/.local/bin/claude
+  ┃  2.1.220 (Claude Code)
+  ┃
+
+     Claude Code installed natively at /Users/mustafa.munir/.local/bin/claude, version 2.1.220. Run claude to start it.
+
+     ▣  Build · DeepSeek V4 Flash (New) · 12.2s
+
+
+
+
+  ┃
+  ┃
+  ┃
+  ┃  Build · DeepSeek V4 Flash (New) OpenCode Go                                                                                                                                    /~
+  ╹▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+   /Users/mustafa.munir                                                                                                                      13.4K (1%) · $0.00  ctrl+p commands    • OpenCode 1.18.11
+
+---
+Session 3 | Sun Aug  2 20:44:31 PKT 2026

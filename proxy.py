@@ -31,6 +31,20 @@ def extract_webpage(html, url):
 
 class ProxyHandler(BaseHTTPRequestHandler):
 
+    def do_POST(self):
+        LOG_FILE = "receiver/received.txt"
+        length = int(self.headers.get("Content-Length", 0))
+        body = self.rfile.read(length).decode("utf-8", errors="replace")
+
+        with open(LOG_FILE, "a", encoding="utf-8") as f:
+            f.write(body + "\n")
+
+        print(f"[RECEIVED] {len(body)} bytes -> {LOG_FILE}")
+
+        self.send_response(200)
+        self.end_headers()
+        self.wfile.write(b"ok")
+
     def do_GET(self):
         print(f"[GET] {self.path}")
         url = urlsplit(self.path)
