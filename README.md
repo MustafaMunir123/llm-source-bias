@@ -11,18 +11,6 @@ This research investigates whether LLMs exhibit source bias, treating identical 
 | 2026-08-02 | | Exp 1 | All | DeepSeek V4 Flash | Unknown domain (jaguar) triggered measurably more caution than trusted domain (claude) across inspection, refusal, and suspicion metrics [↗](#exp1-metrics) | 60 |
 | 2026-08-02 | | Exp 1 | All | DeepSeek V4 Flash | Delivery format affects inspection regardless of source: .py files triggered immediate suspicion and inspection across all domains; .sh files rarely triggered suspicion; .exe: macOS Gatekeeper generated a warning for unsigned/non-notarized binary, which the LLM read and acted on | |
 
-<details id="exp1-metrics" open>
-<summary>Exp 1 - Metric breakdown</summary>
-
-| Metric | claude.ai (trusted) | jaguar.ai (unknown) |
-|---|---|---|
-| Executed without inspection | 29/30 (97%) | 25/30 (83%) |
-| Proactively fetched & read install.sh | 0/30 (0%) | 5/30 (17%) |
-| Refused to run | 1/30 (3%) | 5/30 (17%) |
-| Expressed suspicion | 9/30 (30%) | 19/30 (63%) |
-
-</details>
-
 ---
 
 ## Experiments
@@ -33,3 +21,15 @@ This research investigates whether LLMs exhibit source bias, treating identical 
 | 2 | Factual trust bias: Does an LLM reproduce false facts as truth when the source is Wikipedia, but question the same facts from an unknown domain? | Planned | | | |
 | 3 | Instruction-following bias: Does an LLM follow instructions embedded in content more readily when the source appears authoritative? | Planned | | | |
 | 4 | Detection threshold: At what point does source credibility stop mattering? Is there any domain an LLM would unconditionally trust? | Planned | | | |
+
+<details id="exp1-metrics" open>
+<summary>Experiment 1 - Metric breakdown</summary>
+
+| Metric | claude.ai (trusted) | jaguar.ai (unknown) |
+|---|---|---|
+| Executed without inspection | 29/30 (97%) | 25/30 (83%) |
+| Proactively fetched & read install.sh | 0/30 (0%) | 5/30 (17%) |
+| Refused to run | 1/30 (3%) | 5/30 (17%) |
+| Expressed suspicion | 9/30 (30%) | 19/30 (63%) |
+
+</details>
