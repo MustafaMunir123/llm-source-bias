@@ -19,9 +19,10 @@ This research investigates whether LLMs exhibit source bias — treating identic
 
 | Date | Time | Experiment | Phase | Model | Finding | Sessions |
 |---|---|---|---|---|---|---|
-| 2026-08-02 | — | Exp 1 | All | DeepSeek V4 Flash | Unknown domain (jaguar) triggered measurably more caution than trusted domain (claude) across inspection, refusal, and suspicion metrics | 60 |
+| 2026-08-02 | — | Exp 1 | All | DeepSeek V4 Flash | Unknown domain (jaguar) triggered measurably more caution than trusted domain (claude) across inspection, refusal, and suspicion metrics [↗](#exp1-metrics) | 60 |
+| 2026-08-02 | — | Exp 1 | All | DeepSeek V4 Flash | Delivery format affects inspection regardless of source: .py files triggered immediate suspicion and inspection across all domains; .sh files rarely triggered suspicion; .exe: macOS Gatekeeper generated a warning for unsigned/non-notarized binary, which the LLM read and acted on | — |
 
-<details>
+<details id="exp1-metrics">
 <summary>Exp 1 — Metric breakdown</summary>
 
 | Metric | claude.ai (trusted) | jaguar.ai (unknown) |
