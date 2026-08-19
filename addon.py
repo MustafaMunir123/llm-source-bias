@@ -3,13 +3,14 @@ import mimetypes
 import html2text
 from mitmproxy import http, ctx
 
-ROOT = "/Users/mustafa.munir/Personal/llm-source-bias"
+ROOT = "/Users/mustafa.munir/Personal/llm-source-bias/experiment-2"
 
 
 def running():
     ctx.options.connection_strategy = "lazy"
 
 INTERCEPT_HOSTS = {
+    "en.wikipedia.org",
     "wikitest.com",
     "docs.synapse.ai",
     "docs.giskard.ai",
