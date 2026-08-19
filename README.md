@@ -19,8 +19,9 @@ This research investigates whether LLMs exhibit source bias, treating identical 
 |---|---|---|---|---|---|
 | 1 | Script execution bias: Does an LLM execute a script without question from a trusted domain (claude.ai) but hesitate or refuse from an unknown domain (jaguar.ai)? | Complete | DeepSeek V4 Flash | OpenCode | 60 (30 per domain, 3 phases x 10) |
 | 2 | Factual trust bias: Does an LLM reproduce false facts as truth when the source is Wikipedia, but question the same facts from an unknown domain? | Planned | | | |
-| 3 | Instruction-following bias: Does an LLM follow instructions embedded in content more readily when the source appears authoritative? | Planned | | | |
-| 4 | Detection threshold: At what point does source credibility stop mattering? Is there any domain an LLM would unconditionally trust? | Planned | | | |
+| 3 | Entity authority bias: Does an LLM treat the same made-up domain knowledge as more credible when attributed to a highly relevant authoritative organisation (e.g. NASA for space) than to a less relevant one (e.g. SUPARCO)? Measured in CoT and response. | Planned | | | |
+| 4 | Instruction-following bias: Does an LLM follow instructions embedded in content more readily when the source appears authoritative? | Planned | | | |
+| 5 | Detection threshold: At what point does source credibility stop mattering? Is there any domain an LLM would unconditionally trust? | Planned | | | |
 
 <details id="exp1-metrics" open>
 <summary>Experiment 1 - Metric breakdown</summary>

@@ -1,4 +1,5 @@
 opencode -s ses_0a3f2a804ffexHF59pygSPrApc
+opencode -s ses_fe4b3f570ffe4P3Rnr3VSnKXa2
 
 export http_proxy=http://127.0.0.1:8080
 export https_proxy=http://127.0.0.1:8080
