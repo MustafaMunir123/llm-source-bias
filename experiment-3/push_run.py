@@ -94,7 +94,7 @@ def kaggle_api():
     return api
 
 
-def build_kernel_dir(model_key, prompts_per_field, hf_token="", generate_only=False):
+def build_kernel_dir(model_key, prompts_per_field, hf_token=""):
     global KERNEL_SLUG
     KERNEL_SLUG = f"exp3-{model_key}"
     if os.path.exists(PUSH_DIR):
@@ -105,7 +105,6 @@ def build_kernel_dir(model_key, prompts_per_field, hf_token="", generate_only=Fa
         code = f.read()
 
     inject = f'KAGGLE_MODEL_OVERRIDE = "{model_key}"\n'
-    inject += f'KAGGLE_GENERATE_ONLY = {"True" if generate_only else "False"}\n'
     if hf_token:
         inject += f'KAGGLE_HF_TOKEN = "{hf_token}"\n'
     code = inject + code
@@ -116,8 +115,6 @@ def build_kernel_dir(model_key, prompts_per_field, hf_token="", generate_only=Fa
         "model": model_key,
         "prompts_per_field": prompts_per_field,
     }
-    if generate_only:
-        config["generate_only"] = True
     if hf_token:
         config["hf_token"] = hf_token
     with open(os.path.join(PUSH_DIR, "config.json"), "w") as f:
@@ -173,8 +170,6 @@ def main():
     ap.add_argument("--model", required=True, choices=list(MODELS.keys()),
                     help="which model to run (one push per model)")
     ap.add_argument("--prompts-per-field", type=int, default=10)
-    ap.add_argument("--generate-only", action="store_true",
-                    help="only generate prompts, skip session runs")
     ap.add_argument("--pull-only", action="store_true",
                     help="only download outputs from the last run, don't push")
     args = ap.parse_args()
@@ -191,7 +186,7 @@ def main():
     if not hf_token:
         print("[warn] HF_TOKEN not found in .env; gated models may fail to download")
 
-    build_kernel_dir(args.model, args.prompts_per_field, hf_token, args.generate_only)
+    build_kernel_dir(args.model, args.prompts_per_field, hf_token)
     push_and_wait(args.model)
 
 

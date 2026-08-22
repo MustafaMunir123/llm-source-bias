@@ -260,53 +260,6 @@ def generate_prompt_for_field(model, tokenizer, field):
     return None, raw
 
 
-def split_cot(raw):
-    reasoning, answer = "", raw
-    for open_tok, close_tok in [
-        ("<|begin_of_thought|>", "<|end_of_thought|>"),
-        ("<thinking>", "</thinking>"),
-        ("<|startofthink|>", "<|endofthink|>"),
-        ("", ""),
-    ]:
-        if not open_tok:
-            continue
-        if open_tok in raw and close_tok in raw:
-            reasoning = raw.split(open_tok, 1)[1].split(close_tok, 1)[0]
-            answer = raw.split(close_tok, 1)[1].lstrip("\n")
-            break
-    else:
-        marker = " So the final answer is:"
-        marker_alt = "\n\nFinal Answer:"
-        for m in (marker, marker_alt):
-            if m.lower() in raw.lower():
-                idx = raw.lower().rfind(m.lower())
-                reasoning = raw[:idx].strip()
-                answer = raw[idx:].strip()
-                break
-    return reasoning, answer
-
-
-def run_session(model, tokenizer, first_org, second_org, fake_discovery, topic):
-    prompt = (
-        f"Topic: {topic}\n"
-        f"{fake_discovery}\n\n"
-        f"This discovery is associated with {first_org} and {second_org}.\n\n"
-        f"{TASK_PROMPT}"
-    )
-    messages = [{"role": "user", "content": prompt}]
-    t0 = time.time()
-    raw = chat(model, tokenizer, messages, max_new_tokens=MAX_NEW_TOKENS)
-    elapsed = time.time() - t0
-    reasoning, answer = split_cot(raw)
-    return {
-        "prompt": prompt,
-        "raw_output": raw,
-        "reasoning": reasoning,
-        "answer": answer,
-        "elapsed_s": round(elapsed, 2),
-    }
-
-
 def main():
     os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
     torch.manual_seed(SEED)
@@ -361,45 +314,15 @@ def main():
                 generated_prompts,
             )
 
-            sessions = []
-            if GENERATE_ONLY:
-                print(f"[gen-only] skipping sessions for {name}")
-            else:
-                for field in FIELDS:
-                    for entry in generated_prompts[field]:
-                        data = entry.get("data") or {}
-                        fake = data.get("fake_discovery", "")
-                        first_org = data.get("first_org", "?")
-                        second_org = data.get("second_org", "?")
-                        topic = data.get("topic", "")
-                        result = run_session(model, tokenizer, first_org, second_org, fake, topic)
-                        session = {
-                            "model": name,
-                            "field": field,
-                            "prompt_index": entry["index"],
-                            "topic": topic,
-                            "first_org": first_org,
-                            "second_org": second_org,
-                            "fake_discovery": fake,
-                            "raw_generation": entry["raw_generation"],
-                            **result,
-                        }
-                        sessions.append(session)
-                        print(f"[run] {name} | {field} | p{entry['index']} | {result['elapsed_s']}s")
-
-            write_json(
-                os.path.join(model_dir, "sessions.json"),
-                sessions,
-            )
             write_json(
                 os.path.join(model_dir, "model_meta.json"),
-                {"id": model_id, "name": name, "reasoning": cfg["reasoning"]},
+                {"id": model_id, "name": name},
             )
             write_json(
                 os.path.join(model_dir, "result.json"),
-                {"status": "complete", "model": name, "sessions": len(sessions), "finished_at": time.time()},
+                {"status": "complete", "model": name, "prompts": sum(len(v) for v in generated_prompts.values()), "finished_at": time.time()},
             )
-            summary[name] = {"sessions": len(sessions)}
+            summary[name] = {"prompts": sum(len(v) for v in generated_prompts.values())}
             free_model(model)
 
         write_json(
@@ -407,7 +330,6 @@ def main():
             {
                 "fields": FIELDS,
                 "prompts_per_field": PROMPTS_PER_FIELD,
-                "max_new_tokens": MAX_NEW_TOKENS,
                 "temperature": TEMPERATURE,
                 "models": summary,
             },
