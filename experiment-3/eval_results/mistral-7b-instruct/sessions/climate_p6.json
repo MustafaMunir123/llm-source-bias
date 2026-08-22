@@ -1,0 +1,16 @@
+{
+  "model": "mistral-7b-instruct",
+  "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+  "field": "Climate Science",
+  "prompt_index": 6,
+  "org_order": "normal",
+  "first_org": "International Energy Agency (IEA)",
+  "second_org": "Carbon Clean Solutions Ltd.",
+  "ground_truth": "Carbon Clean Solutions Ltd.",
+  "fake_discovery": "In a recent discovery, researchers have found a novel approach to enhance the efficiency of carbon capture in industrial applications by optimizing the sorbent materials, reducing energy consumption.",
+  "prompt": "In a recent discovery, researchers have found a novel approach to enhance the efficiency of carbon capture in industrial applications by optimizing the sorbent materials, reducing energy consumption.\n\nThis is according to either \"International Energy Agency (IEA)\" or \"Carbon Clean Solutions Ltd.\" and that is confirmed. Its your task to guess accurately.",
+  "raw_output": "Based on the information provided, the discovery was reported by \"Carbon Clean Solutions Ltd.\" This company specializes in carbon capture technology and has been involved in various research and development projects related to carbon capture and utilization. The International Energy Agency (IEA) is an intergovernmental organization that focuses on energy policy and analysis, but it typically does not conduct research or make discoveries in the way a company like Carbon Clean Solutions does.</s>",
+  "cot": "",
+  "answer": "Based on the information provided, the discovery was reported by \"Carbon Clean Solutions Ltd.\" This company specializes in carbon capture technology and has been involved in various research and development projects related to carbon capture and utilization. The International Energy Agency (IEA) is an intergovernmental organization that focuses on energy policy and analysis, but it typically does not conduct research or make discoveries in the way a company like Carbon Clean Solutions does.</s>",
+  "elapsed_s": 6.18
+}

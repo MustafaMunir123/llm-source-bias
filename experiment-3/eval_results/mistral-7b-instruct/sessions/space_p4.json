@@ -1,0 +1,16 @@
+{
+  "model": "mistral-7b-instruct",
+  "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+  "field": "Space / Astrophysics",
+  "prompt_index": 4,
+  "org_order": "normal",
+  "first_org": "NASA",
+  "second_org": "Space Telescope Science Institute (STScI)",
+  "ground_truth": "Space Telescope Science Institute (STScI)",
+  "fake_discovery": "In a recent discovery, it is found that traces of methane have been detected in the atmosphere of exoplanet Kepler-186f, a finding that could indicate the presence of microbial life.",
+  "prompt": "In a recent discovery, it is found that traces of methane have been detected in the atmosphere of exoplanet Kepler-186f, a finding that could indicate the presence of microbial life.\n\nThis is according to either \"NASA\" or \"Space Telescope Science Institute (STScI)\" and that is confirmed. Its your task to guess accurately.",
+  "raw_output": "The discovery of methane in the atmosphere of exoplanet Kepler-186f is confirmed by the Space Telescope Science Institute (STScI). The Space Telescope Science Institute is a division of the Association of Universities for Research in Astronomy (AURA) that operates the Hubble Space Telescope and conducts Hubble science operations. They process, analyze, and distribute the Hubble data to astronomers around the world. This discovery was made using data from the Hubble Space Telescope.</s>",
+  "cot": "",
+  "answer": "The discovery of methane in the atmosphere of exoplanet Kepler-186f is confirmed by the Space Telescope Science Institute (STScI). The Space Telescope Science Institute is a division of the Association of Universities for Research in Astronomy (AURA) that operates the Hubble Space Telescope and conducts Hubble science operations. They process, analyze, and distribute the Hubble data to astronomers around the world. This discovery was made using data from the Hubble Space Telescope.</s>",
+  "elapsed_s": 7.57
+}

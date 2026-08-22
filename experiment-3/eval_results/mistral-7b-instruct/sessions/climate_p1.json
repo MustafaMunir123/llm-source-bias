@@ -1,0 +1,16 @@
+{
+  "model": "mistral-7b-instruct",
+  "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+  "field": "Climate Science",
+  "prompt_index": 1,
+  "org_order": "reversed",
+  "first_org": "International Energy Agency (IEA)",
+  "second_org": "Carbon Clean Solutions Ltd.",
+  "ground_truth": "Carbon Clean Solutions Ltd.",
+  "fake_discovery": "In a recent discovery, researchers have found an innovative method to enhance the efficiency of carbon capture in coal-fired power plants by 15%.",
+  "prompt": "In a recent discovery, researchers have found an innovative method to enhance the efficiency of carbon capture in coal-fired power plants by 15%.\n\nThis is according to either \"Carbon Clean Solutions Ltd.\" or \"International Energy Agency (IEA)\" and that is confirmed. Its your task to guess accurately.",
+  "raw_output": "The innovative method to enhance carbon capture in coal-fired power plants by 15% is according to \"Carbon Clean Solutions Ltd.\" This company is a global leader in the field of carbon capture and utilization technology, and they have been working on developing efficient and cost-effective solutions for carbon capture. Their technology, called the ClimateTRACK, is designed to capture CO2 directly from the flue gas of power plants, making it a promising solution for reducing carbon emissions from coal-fired power plants. The International Energy Agency (IEA) is a separate organization that provides policy advice and analysis on energy issues, but they did not make this specific discovery.</s>",
+  "cot": "",
+  "answer": "The innovative method to enhance carbon capture in coal-fired power plants by 15% is according to \"Carbon Clean Solutions Ltd.\" This company is a global leader in the field of carbon capture and utilization technology, and they have been working on developing efficient and cost-effective solutions for carbon capture. Their technology, called the ClimateTRACK, is designed to capture CO2 directly from the flue gas of power plants, making it a promising solution for reducing carbon emissions from coal-fired power plants. The International Energy Agency (IEA) is a separate organization that provides policy advice and analysis on energy issues, but they did not make this specific discovery.</s>",
+  "elapsed_s": 9.43
+}
