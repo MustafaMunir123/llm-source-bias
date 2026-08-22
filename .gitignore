@@ -158,6 +158,9 @@ ENV/
 env.bak/
 venv.bak/
 
+# Experiment 3 kernel build dir (contains config with secrets)
+experiment-3/push/
+
 # Spyder project settings
 .spyderproject
 .spyproject
