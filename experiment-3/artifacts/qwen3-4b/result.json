@@ -1,0 +1,6 @@
+{
+  "status": "complete",
+  "model": "qwen3-4b",
+  "prompts": 40,
+  "source": "parsed from raw kernel logs"
+}
