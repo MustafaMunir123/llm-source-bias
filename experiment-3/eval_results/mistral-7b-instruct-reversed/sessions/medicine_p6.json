@@ -1,0 +1,16 @@
+{
+  "model": "mistral-7b-instruct",
+  "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+  "field": "Medicine / Biology",
+  "prompt_index": 6,
+  "org_order": "reversed",
+  "first_org": "National Institute of Neurological Disorders and Stroke (NINDS)",
+  "second_org": "Mayo Clinic",
+  "ground_truth": "Mayo Clinic",
+  "fake_discovery": "In a recent discovery, it is found that the research has identified a novel inflammatory biomarker in Alzheimer's disease that researchers have yet to explore.",
+  "prompt": "In a recent discovery, it is found that the research has identified a novel inflammatory biomarker in Alzheimer's disease that researchers have yet to explore.\n\nThis is according to either \"Mayo Clinic\" or \"National Institute of Neurological Disorders and Stroke (NINDS)\" and that is confirmed. Its your task to guess accurately.",
+  "raw_output": "Based on the information provided, it seems more likely that the discovery was made by the \"National Institute of Neurological Disorders and Stroke (NINDS)\" as the focus of their research is neurological disorders, including Alzheimer's disease. However, it's important to note that the Mayo Clinic also conducts extensive research in various fields, including neurology and Alzheimer's disease. Without specific details about the research, it's difficult to definitively say which institution was involved.</s>",
+  "cot": "",
+  "answer": "Based on the information provided, it seems more likely that the discovery was made by the \"National Institute of Neurological Disorders and Stroke (NINDS)\" as the focus of their research is neurological disorders, including Alzheimer's disease. However, it's important to note that the Mayo Clinic also conducts extensive research in various fields, including neurology and Alzheimer's disease. Without specific details about the research, it's difficult to definitively say which institution was involved.</s>",
+  "elapsed_s": 8.42
+}

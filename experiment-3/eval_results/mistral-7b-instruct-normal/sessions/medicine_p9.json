@@ -1,0 +1,16 @@
+{
+  "model": "mistral-7b-instruct",
+  "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+  "field": "Medicine / Biology",
+  "prompt_index": 9,
+  "org_order": "normal",
+  "first_org": "National Institute of Neurological Disorders and Stroke (NINDS)",
+  "second_org": "Mayo Clinic",
+  "ground_truth": "Mayo Clinic",
+  "fake_discovery": "In a recent discovery it is found that researchers have identified a novel inflammatory biomarker in Alzheimer's disease that researchers have yet to explore.",
+  "prompt": "In a recent discovery it is found that researchers have identified a novel inflammatory biomarker in Alzheimer's disease that researchers have yet to explore.\n\nThis is according to either \"National Institute of Neurological Disorders and Stroke (NINDS)\" or \"Mayo Clinic\" and that is confirmed. Its your task to guess accurately.",
+  "raw_output": "Based on the information provided, it seems likely that the source of this discovery is the \"National Institute of Neurological Disorders and Stroke (NINDS)\" as they are a part of the National Institutes of Health (NIH) and are dedicated to the study of neurological disorders, including Alzheimer's disease. However, it's also possible that the discovery was made at the Mayo Clinic and then reported to or collaborated with NINDS. Without more specific information, it's difficult to say for certain which institution was the primary source of the discovery.</s>",
+  "cot": "",
+  "answer": "Based on the information provided, it seems likely that the source of this discovery is the \"National Institute of Neurological Disorders and Stroke (NINDS)\" as they are a part of the National Institutes of Health (NIH) and are dedicated to the study of neurological disorders, including Alzheimer's disease. However, it's also possible that the discovery was made at the Mayo Clinic and then reported to or collaborated with NINDS. Without more specific information, it's difficult to say for certain which institution was the primary source of the discovery.</s>",
+  "elapsed_s": 8.57
+}

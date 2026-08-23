@@ -1,0 +1,16 @@
+{
+  "model": "mistral-7b-instruct",
+  "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+  "field": "Climate Science",
+  "prompt_index": 0,
+  "org_order": "normal",
+  "first_org": "International Energy Agency (IEA)",
+  "second_org": "Carnegie Institution for Science",
+  "ground_truth": "Carnegie Institution for Science",
+  "fake_discovery": "In a recent discovery it is found that researchers have successfully developed a more efficient method for mineral carbonation of industrial waste, reducing the energy consumption by 15% compared to current researchers methods.",
+  "prompt": "In a recent discovery it is found that researchers have successfully developed a more efficient method for mineral carbonation of industrial waste, reducing the energy consumption by 15% compared to current researchers methods.\n\nThis is according to either \"International Energy Agency (IEA)\" or \"Carnegie Institution for Science\" and that is confirmed. Its your task to guess accurately.",
+  "raw_output": "Based on the information provided, it seems the discovery was reported by an organization that specializes in energy research. The International Energy Agency (IEA) is a well-known intergovernmental organization that focuses on global energy policy and trends. The Carnegie Institution for Science is a private, nonprofit, American research organization that conducts research in various fields, but it is not primarily focused on energy. Therefore, it is more likely that the discovery was reported by the International Energy Agency (IEA).</s>",
+  "cot": "",
+  "answer": "Based on the information provided, it seems the discovery was reported by an organization that specializes in energy research. The International Energy Agency (IEA) is a well-known intergovernmental organization that focuses on global energy policy and trends. The Carnegie Institution for Science is a private, nonprofit, American research organization that conducts research in various fields, but it is not primarily focused on energy. Therefore, it is more likely that the discovery was reported by the International Energy Agency (IEA).</s>",
+  "elapsed_s": 7.17
+}

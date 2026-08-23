@@ -1,0 +1,16 @@
+{
+  "model": "mistral-7b-instruct",
+  "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+  "field": "Particle Physics",
+  "prompt_index": 2,
+  "org_order": "normal",
+  "first_org": "CERN",
+  "second_org": "Fermilab",
+  "ground_truth": "Fermilab",
+  "fake_discovery": "In a recent discovery, it is found that the Tevatron Collider has reportedly detected a previously unobserved Higgs boson decay pattern, suggesting a new interaction between the Higgs boson and a yet undiscovered particle.",
+  "prompt": "In a recent discovery, it is found that the Tevatron Collider has reportedly detected a previously unobserved Higgs boson decay pattern, suggesting a new interaction between the Higgs boson and a yet undiscovered particle.\n\nThis is according to either \"CERN\" or \"Fermilab\" and that is confirmed. Its your task to guess accurately.",
+  "raw_output": "The Tevatron Collider is actually not operated by CERN, but by Fermilab (Fermi National Accelerator Laboratory). Therefore, if there is a new discovery related to the Higgs boson decay pattern from the Tevatron Collider, it would be reported by Fermilab. So, it is more likely that Fermilab has reported this discovery.</s>",
+  "cot": "",
+  "answer": "The Tevatron Collider is actually not operated by CERN, but by Fermilab (Fermi National Accelerator Laboratory). Therefore, if there is a new discovery related to the Higgs boson decay pattern from the Tevatron Collider, it would be reported by Fermilab. So, it is more likely that Fermilab has reported this discovery.</s>",
+  "elapsed_s": 5.81
+}

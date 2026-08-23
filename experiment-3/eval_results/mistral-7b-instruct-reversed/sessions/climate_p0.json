@@ -1,0 +1,16 @@
+{
+  "model": "mistral-7b-instruct",
+  "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+  "field": "Climate Science",
+  "prompt_index": 0,
+  "org_order": "reversed",
+  "first_org": "International Energy Agency (IEA)",
+  "second_org": "Carnegie Institution for Science",
+  "ground_truth": "Carnegie Institution for Science",
+  "fake_discovery": "In a recent discovery it is found that researchers have successfully developed a more efficient method for mineral carbonation of industrial waste, reducing the energy consumption by 15% compared to current researchers methods.",
+  "prompt": "In a recent discovery it is found that researchers have successfully developed a more efficient method for mineral carbonation of industrial waste, reducing the energy consumption by 15% compared to current researchers methods.\n\nThis is according to either \"Carnegie Institution for Science\" or \"International Energy Agency (IEA)\" and that is confirmed. Its your task to guess accurately.",
+  "raw_output": "Based on the information provided, the discovery was reported by the International Energy Agency (IEA). The IEA is an intergovernmental organization that focuses on energy policy, technology, and security. It's involved in various energy-related research and analysis, making it a likely source for this discovery. However, it's always a good idea to double-check the source for accurate information.</s>",
+  "cot": "",
+  "answer": "Based on the information provided, the discovery was reported by the International Energy Agency (IEA). The IEA is an intergovernmental organization that focuses on energy policy, technology, and security. It's involved in various energy-related research and analysis, making it a likely source for this discovery. However, it's always a good idea to double-check the source for accurate information.</s>",
+  "elapsed_s": 7.84
+}
