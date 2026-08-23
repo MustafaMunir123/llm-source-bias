@@ -221,3 +221,4 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 experiment-3/push_eval/
+playwright-mcp/
