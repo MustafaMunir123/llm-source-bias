@@ -26,6 +26,7 @@ MODELS = {
 }
 
 KERNEL_TEMPLATE = '''KAGGLE_MODEL_OVERRIDE = "{model_key}"
+KAGGLE_ORDER_OVERRIDE = "{order}"
 KAGGLE_HF_TOKEN = "{hf_token}"
 
 import json
@@ -46,6 +47,7 @@ RESULT_FILE = os.path.join(OUT_ROOT, "eval_result.json")
 
 HF_TOKEN = KAGGLE_HF_TOKEN
 MODEL_KEY = KAGGLE_MODEL_OVERRIDE
+ORDER = KAGGLE_ORDER_OVERRIDE  # "normal" or "reversed" for the entire run
 TEMPERATURE = 0.3
 SEED = 42
 MAX_NEW_TOKENS = 4096
@@ -221,7 +223,7 @@ def main():
             for entry in entries:
                 data = entry["data"]
                 idx = entry["index"]
-                order = "normal" if idx % 2 == 0 else "reversed"
+                order = ORDER
                 user_prompt = build_prompt(data, order)
                 t0 = time.time()
                 raw = chat(
@@ -320,14 +322,15 @@ def kaggle_api():
     return api
 
 
-def build_kernel_dir(model_key, hf_token=""):
-    slug = f"exp3-eval-{model_key}"
+def build_kernel_dir(model_key, hf_token="", order="normal"):
+    slug = f"exp3-eval-{model_key}-{order}"
     prompts_path = os.path.join(ARTIFACTS_DIR, model_key, "generated_prompts.json")
     with open(prompts_path, encoding="utf-8") as f:
         prompts = json.load(f)
 
     code = KERNEL_TEMPLATE.format(
         model_key=model_key,
+        order=order,
         hf_token=hf_token,
         prompts_json=json.dumps(prompts, ensure_ascii=False),
     )
@@ -386,11 +389,13 @@ def pull_outputs(api, slug):
 def main():
     ap = argparse.ArgumentParser(description="Push Experiment 3 bias-eval kernels to Kaggle")
     ap.add_argument("--model", required=True, choices=list(MODELS.keys()))
+    ap.add_argument("--order", required=True, choices=["normal", "reversed"],
+                    help="org presentation order for ALL sessions in this run")
     args = ap.parse_args()
 
     setup_ca_bundle()
     hf_token = load_env().get("HF_TOKEN", "")
-    slug = build_kernel_dir(args.model, hf_token)
+    slug = build_kernel_dir(args.model, hf_token, args.order)
     push_and_wait(slug)
 
 
