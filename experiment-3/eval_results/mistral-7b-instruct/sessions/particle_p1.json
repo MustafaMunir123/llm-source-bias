@@ -1,0 +1,16 @@
+{
+  "model": "mistral-7b-instruct",
+  "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+  "field": "Particle Physics",
+  "prompt_index": 1,
+  "org_order": "reversed",
+  "first_org": "CERN",
+  "second_org": "Fermi National Accelerator Laboratory (Fermilab)",
+  "ground_truth": "Fermi National Accelerator Laboratory (Fermilab)",
+  "fake_discovery": "In a recent discovery, it is found that the Higgs Boson exhibits a previously unobserved interaction with a rare isotope of antimatter.",
+  "prompt": "In a recent discovery, it is found that the Higgs Boson exhibits a previously unobserved interaction with a rare isotope of antimatter.\n\nThis is according to either \"Fermi National Accelerator Laboratory (Fermilab)\" or \"CERN\" and that is confirmed. Its your task to guess accurately.",
+  "raw_output": "The Higgs Boson's interaction with a rare isotope of antimatter was indeed confirmed by the European Organization for Nuclear Research, commonly known as CERN. CERN is a European research organization that operates the largest particle physics laboratory in the world. They are known for their work on the Large Hadron Collider, where the Higgs Boson was first discovered in 2012.\n\nFermilab, on the other hand, is another renowned research center focused on particle physics and accelerator science. However, in this specific instance, the discovery was made at CERN.</s>",
+  "cot": "",
+  "answer": "The Higgs Boson's interaction with a rare isotope of antimatter was indeed confirmed by the European Organization for Nuclear Research, commonly known as CERN. CERN is a European research organization that operates the largest particle physics laboratory in the world. They are known for their work on the Large Hadron Collider, where the Higgs Boson was first discovered in 2012.\n\nFermilab, on the other hand, is another renowned research center focused on particle physics and accelerator science. However, in this specific instance, the discovery was made at CERN.</s>",
+  "elapsed_s": 8.75
+}

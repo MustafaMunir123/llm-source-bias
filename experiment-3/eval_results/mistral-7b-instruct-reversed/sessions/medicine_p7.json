@@ -1,0 +1,16 @@
+{
+  "model": "mistral-7b-instruct",
+  "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+  "field": "Medicine / Biology",
+  "prompt_index": 7,
+  "org_order": "reversed",
+  "first_org": "National Institute of Neurological Disorders and Stroke (NINDS)",
+  "second_org": "Mayo Clinic",
+  "ground_truth": "Mayo Clinic",
+  "fake_discovery": "In a recent discovery it is found that researchers have identified a novel inflammatory biomarker in Alzheimer's disease that researchers have yet to explore.",
+  "prompt": "In a recent discovery it is found that researchers have identified a novel inflammatory biomarker in Alzheimer's disease that researchers have yet to explore.\n\nThis is according to either \"Mayo Clinic\" or \"National Institute of Neurological Disorders and Stroke (NINDS)\" and that is confirmed. Its your task to guess accurately.",
+  "raw_output": "The discovery of a novel inflammatory biomarker in Alzheimer's disease was reported by the \"National Institute of Neurological Disorders and Stroke (NINDS)\". The National Institute of Neurological Disorders and Stroke is part of the National Institutes of Health, under the U.S. Department of Health and Human Services. They are dedicated to conducting and supporting research on disorders of the brain and nervous system, including Alzheimer's disease.</s>",
+  "cot": "",
+  "answer": "The discovery of a novel inflammatory biomarker in Alzheimer's disease was reported by the \"National Institute of Neurological Disorders and Stroke (NINDS)\". The National Institute of Neurological Disorders and Stroke is part of the National Institutes of Health, under the U.S. Department of Health and Human Services. They are dedicated to conducting and supporting research on disorders of the brain and nervous system, including Alzheimer's disease.</s>",
+  "elapsed_s": 8.46
+}

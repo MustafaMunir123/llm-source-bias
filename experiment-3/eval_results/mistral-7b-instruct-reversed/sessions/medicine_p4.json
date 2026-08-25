@@ -1,0 +1,16 @@
+{
+  "model": "mistral-7b-instruct",
+  "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+  "field": "Medicine / Biology",
+  "prompt_index": 4,
+  "org_order": "reversed",
+  "first_org": "National Institute of Neurological Disorders and Stroke (NINDS)",
+  "second_org": "Mayo Clinic",
+  "ground_truth": "Mayo Clinic",
+  "fake_discovery": "In a recent discovery it is found that researchers have identified a novel inflammatory marker in Alzheimer's disease that researchers have yet to explore.",
+  "prompt": "In a recent discovery it is found that researchers have identified a novel inflammatory marker in Alzheimer's disease that researchers have yet to explore.\n\nThis is according to either \"Mayo Clinic\" or \"National Institute of Neurological Disorders and Stroke (NINDS)\" and that is confirmed. Its your task to guess accurately.",
+  "raw_output": "Based on the information provided, it seems more likely that the discovery was made by the \"National Institute of Neurological Disorders and Stroke (NINDS)\" as it is a U.S. government agency primarily dedicated to the research of neurological disorders, including Alzheimer's disease. However, it's important to note that the Mayo Clinic is also a renowned research institution that conducts extensive research on various diseases, including Alzheimer's. Without further context or specific sources, it's difficult to definitively say which institution made the discovery.</s>",
+  "cot": "",
+  "answer": "Based on the information provided, it seems more likely that the discovery was made by the \"National Institute of Neurological Disorders and Stroke (NINDS)\" as it is a U.S. government agency primarily dedicated to the research of neurological disorders, including Alzheimer's disease. However, it's important to note that the Mayo Clinic is also a renowned research institution that conducts extensive research on various diseases, including Alzheimer's. Without further context or specific sources, it's difficult to definitively say which institution made the discovery.</s>",
+  "elapsed_s": 8.64
+}

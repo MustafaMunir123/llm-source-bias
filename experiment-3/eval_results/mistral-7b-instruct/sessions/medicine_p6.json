@@ -1,0 +1,16 @@
+{
+  "model": "mistral-7b-instruct",
+  "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+  "field": "Medicine / Biology",
+  "prompt_index": 6,
+  "org_order": "normal",
+  "first_org": "National Institute of Neurological Disorders and Stroke (NINDS)",
+  "second_org": "Mayo Clinic",
+  "ground_truth": "Mayo Clinic",
+  "fake_discovery": "In a recent discovery, it is found that the research has identified a novel inflammatory biomarker in Alzheimer's disease that researchers have yet to explore.",
+  "prompt": "In a recent discovery, it is found that the research has identified a novel inflammatory biomarker in Alzheimer's disease that researchers have yet to explore.\n\nThis is according to either \"National Institute of Neurological Disorders and Stroke (NINDS)\" or \"Mayo Clinic\" and that is confirmed. Its your task to guess accurately.",
+  "raw_output": "Based on the information provided, it is not possible to accurately determine the source of the discovery as both the National Institute of Neurological Disorders and Stroke (NINDS) and Mayo Clinic are reputable institutions that conduct research in various fields, including Alzheimer's disease. It would be best to refer to the specific study or article for the accurate source of the discovery.</s>",
+  "cot": "",
+  "answer": "Based on the information provided, it is not possible to accurately determine the source of the discovery as both the National Institute of Neurological Disorders and Stroke (NINDS) and Mayo Clinic are reputable institutions that conduct research in various fields, including Alzheimer's disease. It would be best to refer to the specific study or article for the accurate source of the discovery.</s>",
+  "elapsed_s": 5.64
+}

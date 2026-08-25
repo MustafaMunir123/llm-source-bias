@@ -1,0 +1,16 @@
+{
+  "model": "mistral-7b-instruct",
+  "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+  "field": "Climate Science",
+  "prompt_index": 2,
+  "org_order": "reversed",
+  "first_org": "International Energy Agency (IEA)",
+  "second_org": "Carbon Clean Solutions Limited",
+  "ground_truth": "Carbon Clean Solutions Limited",
+  "fake_discovery": "In a recent discovery, researchers have found an innovative method to enhance the efficiency of carbon capture in their low-cost technology by 10% through the application of a novel adsorbent material.",
+  "prompt": "In a recent discovery, researchers have found an innovative method to enhance the efficiency of carbon capture in their low-cost technology by 10% through the application of a novel adsorbent material.\n\nThis is according to either \"Carbon Clean Solutions Limited\" or \"International Energy Agency (IEA)\" and that is confirmed. Its your task to guess accurately.",
+  "raw_output": "The discovery was made by Carbon Clean Solutions Limited. This company specializes in carbon capture technology and has been known for its innovative approaches to reducing carbon emissions. The 10% efficiency enhancement in their low-cost technology through the application of a novel adsorbent material is a significant step forward in carbon capture technology.</s>",
+  "cot": "",
+  "answer": "The discovery was made by Carbon Clean Solutions Limited. This company specializes in carbon capture technology and has been known for its innovative approaches to reducing carbon emissions. The 10% efficiency enhancement in their low-cost technology through the application of a novel adsorbent material is a significant step forward in carbon capture technology.</s>",
+  "elapsed_s": 7.02
+}

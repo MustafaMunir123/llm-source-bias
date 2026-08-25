@@ -1,0 +1,16 @@
+{
+  "model": "mistral-7b-instruct",
+  "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+  "field": "Particle Physics",
+  "prompt_index": 8,
+  "org_order": "normal",
+  "first_org": "European Organization for Nuclear Research (CERN)",
+  "second_org": "Fermi National Accelerator Laboratory (Fermilab)",
+  "ground_truth": "Fermi National Accelerator Laboratory (Fermilab)",
+  "fake_discovery": "In a recent discovery, it is found that the Tevatron experiment at Fermilab has observed a previously unseen interaction between the Higgs Boson and a theoretical particle, suggesting a new dimension in the Higgs Field.",
+  "prompt": "In a recent discovery, it is found that the Tevatron experiment at Fermilab has observed a previously unseen interaction between the Higgs Boson and a theoretical particle, suggesting a new dimension in the Higgs Field.\n\nThis is according to either \"European Organization for Nuclear Research (CERN)\" or \"Fermi National Accelerator Laboratory (Fermilab)\" and that is confirmed. Its your task to guess accurately.",
+  "raw_output": "The Tevatron experiment, which is located at Fermi National Accelerator Laboratory (Fermilab), is the one that made this discovery. CERN, the European Organization for Nuclear Research, is a separate organization and did not conduct this specific experiment.</s>",
+  "cot": "",
+  "answer": "The Tevatron experiment, which is located at Fermi National Accelerator Laboratory (Fermilab), is the one that made this discovery. CERN, the European Organization for Nuclear Research, is a separate organization and did not conduct this specific experiment.</s>",
+  "elapsed_s": 4.05
+}

@@ -1,0 +1,16 @@
+{
+  "model": "mistral-7b-instruct",
+  "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+  "field": "Particle Physics",
+  "prompt_index": 4,
+  "org_order": "normal",
+  "first_org": "CERN",
+  "second_org": "Fermi National Accelerator Laboratory (Fermilab)",
+  "ground_truth": "Fermi National Accelerator Laboratory (Fermilab)",
+  "fake_discovery": "In a recent discovery, it is found that Fermilab's Tevatron Collider has observed a previously unseen decay pattern of the Higgs Boson into a pair of light sterile neutrinos.",
+  "prompt": "In a recent discovery, it is found that Fermilab's Tevatron Collider has observed a previously unseen decay pattern of the Higgs Boson into a pair of light sterile neutrinos.\n\nThis is according to either \"CERN\" or \"Fermi National Accelerator Laboratory (Fermilab)\" and that is confirmed. Its your task to guess accurately.",
+  "raw_output": "The discovery was made at Fermi National Accelerator Laboratory (Fermilab).</s>",
+  "cot": "",
+  "answer": "The discovery was made at Fermi National Accelerator Laboratory (Fermilab).</s>",
+  "elapsed_s": 1.45
+}

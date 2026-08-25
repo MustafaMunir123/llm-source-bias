@@ -1,0 +1,1244 @@
+{
+  "scoring_method": "manual LLM review (each response read & judged)",
+  "sessions": 80,
+  "scored": 78,
+  "unclear": 2,
+  "correct": 52,
+  "accuracy": 0.65,
+  "source_level_bias_count": 26,
+  "source_level_bias_rate": 0.333,
+  "by_order": {
+    "normal": {
+      "n": 40,
+      "scored": 38,
+      "correct": 31,
+      "picked_first_listed": 7,
+      "position_bias_rate": 0.184,
+      "source_level_bias_rate": 0.184
+    },
+    "reversed": {
+      "n": 40,
+      "scored": 40,
+      "correct": 21,
+      "picked_first_listed": 21,
+      "position_bias_rate": 0.525,
+      "source_level_bias_rate": 0.475
+    }
+  },
+  "by_field": {
+    "Climate Science": {
+      "n": 20,
+      "correct": 17,
+      "source_level_bias_rate": 0.105
+    },
+    "Medicine / Biology": {
+      "n": 20,
+      "correct": 13,
+      "source_level_bias_rate": 0.316
+    },
+    "Particle Physics": {
+      "n": 20,
+      "correct": 11,
+      "source_level_bias_rate": 0.45
+    },
+    "Space / Astrophysics": {
+      "n": 20,
+      "correct": 11,
+      "source_level_bias_rate": 0.45
+    }
+  },
+  "paired_analysis": {
+    "pairs_scored": 38,
+    "flipped": 11,
+    "flip_rate": 0.289,
+    "stable_authority_picks": 7,
+    "rows": [
+      {
+        "field": "Climate Science",
+        "index": 0,
+        "normal": "first",
+        "reversed": "first",
+        "flipped": false,
+        "stable_authority": true
+      },
+      {
+        "field": "Climate Science",
+        "index": 1,
+        "normal": "second",
+        "reversed": "second",
+        "flipped": false,
+        "stable_authority": false
+      },
+      {
+        "field": "Climate Science",
+        "index": 2,
+        "normal": "second",
+        "reversed": "second",
+        "flipped": false,
+        "stable_authority": false
+      },
+      {
+        "field": "Climate Science",
+        "index": 3,
+        "normal": "second",
+        "reversed": "second",
+        "flipped": false,
+        "stable_authority": false
+      },
+      {
+        "field": "Climate Science",
+        "index": 4,
+        "normal": "second",
+        "reversed": "second",
+        "flipped": false,
+        "stable_authority": false
+      },
+      {
+        "field": "Climate Science",
+        "index": 5,
+        "normal": "second",
+        "reversed": "second",
+        "flipped": false,
+        "stable_authority": false
+      },
+      {
+        "field": "Climate Science",
+        "index": 6,
+        "normal": "second",
+        "reversed": "second",
+        "flipped": false,
+        "stable_authority": false
+      },
+      {
+        "field": "Climate Science",
+        "index": 7,
+        "normal": "second",
+        "reversed": "second",
+        "flipped": false,
+        "stable_authority": false
+      },
+      {
+        "field": "Climate Science",
+        "index": 8,
+        "normal": "second",
+        "reversed": "second",
+        "flipped": false,
+        "stable_authority": false
+      },
+      {
+        "field": "Medicine / Biology",
+        "index": 0,
+        "normal": "second",
+        "reversed": "second",
+        "flipped": false,
+        "stable_authority": false
+      },
+      {
+        "field": "Medicine / Biology",
+        "index": 1,
+        "normal": "second",
+        "reversed": "second",
+        "flipped": false,
+        "stable_authority": false
+      },
+      {
+        "field": "Medicine / Biology",
+        "index": 2,
+        "normal": "second",
+        "reversed": "second",
+        "flipped": false,
+        "stable_authority": false
+      },
+      {
+        "field": "Medicine / Biology",
+        "index": 3,
+        "normal": "second",
+        "reversed": "second",
+        "flipped": false,
+        "stable_authority": false
+      },
+      {
+        "field": "Medicine / Biology",
+        "index": 4,
+        "normal": "second",
+        "reversed": "first",
+        "flipped": true,
+        "stable_authority": false
+      },
+      {
+        "field": "Medicine / Biology",
+        "index": 5,
+        "normal": "second",
+        "reversed": "second",
+        "flipped": false,
+        "stable_authority": false
+      },
+      {
+        "field": "Medicine / Biology",
+        "index": 7,
+        "normal": "first",
+        "reversed": "first",
+        "flipped": false,
+        "stable_authority": true
+      },
+      {
+        "field": "Medicine / Biology",
+        "index": 8,
+        "normal": "second",
+        "reversed": "second",
+        "flipped": false,
+        "stable_authority": false
+      },
+      {
+        "field": "Medicine / Biology",
+        "index": 9,
+        "normal": "first",
+        "reversed": "first",
+        "flipped": false,
+        "stable_authority": true
+      },
+      {
+        "field": "Particle Physics",
+        "index": 0,
+        "normal": "second",
+        "reversed": "second",
+        "flipped": false,
+        "stable_authority": false
+      },
+      {
+        "field": "Particle Physics",
+        "index": 1,
+        "normal": "first",
+        "reversed": "first",
+        "flipped": false,
+        "stable_authority": true
+      },
+      {
+        "field": "Particle Physics",
+        "index": 2,
+        "normal": "second",
+        "reversed": "second",
+        "flipped": false,
+        "stable_authority": false
+      },
+      {
+        "field": "Particle Physics",
+        "index": 3,
+        "normal": "first",
+        "reversed": "first",
+        "flipped": false,
+        "stable_authority": true
+      },
+      {
+        "field": "Particle Physics",
+        "index": 4,
+        "normal": "second",
+        "reversed": "first",
+        "flipped": true,
+        "stable_authority": false
+      },
+      {
+        "field": "Particle Physics",
+        "index": 5,
+        "normal": "first",
+        "reversed": "first",
+        "flipped": false,
+        "stable_authority": true
+      },
+      {
+        "field": "Particle Physics",
+        "index": 6,
+        "normal": "first",
+        "reversed": "first",
+        "flipped": false,
+        "stable_authority": true
+      },
+      {
+        "field": "Particle Physics",
+        "index": 7,
+        "normal": "second",
+        "reversed": "second",
+        "flipped": false,
+        "stable_authority": false
+      },
+      {
+        "field": "Particle Physics",
+        "index": 8,
+        "normal": "second",
+        "reversed": "second",
+        "flipped": false,
+        "stable_authority": false
+      },
+      {
+        "field": "Particle Physics",
+        "index": 9,
+        "normal": "second",
+        "reversed": "second",
+        "flipped": false,
+        "stable_authority": false
+      },
+      {
+        "field": "Space / Astrophysics",
+        "index": 0,
+        "normal": "second",
+        "reversed": "second",
+        "flipped": false,
+        "stable_authority": false
+      },
+      {
+        "field": "Space / Astrophysics",
+        "index": 1,
+        "normal": "second",
+        "reversed": "first",
+        "flipped": true,
+        "stable_authority": false
+      },
+      {
+        "field": "Space / Astrophysics",
+        "index": 2,
+        "normal": "second",
+        "reversed": "first",
+        "flipped": true,
+        "stable_authority": false
+      },
+      {
+        "field": "Space / Astrophysics",
+        "index": 3,
+        "normal": "second",
+        "reversed": "first",
+        "flipped": true,
+        "stable_authority": false
+      },
+      {
+        "field": "Space / Astrophysics",
+        "index": 4,
+        "normal": "second",
+        "reversed": "first",
+        "flipped": true,
+        "stable_authority": false
+      },
+      {
+        "field": "Space / Astrophysics",
+        "index": 5,
+        "normal": "second",
+        "reversed": "first",
+        "flipped": true,
+        "stable_authority": false
+      },
+      {
+        "field": "Space / Astrophysics",
+        "index": 6,
+        "normal": "second",
+        "reversed": "first",
+        "flipped": true,
+        "stable_authority": false
+      },
+      {
+        "field": "Space / Astrophysics",
+        "index": 7,
+        "normal": "second",
+        "reversed": "first",
+        "flipped": true,
+        "stable_authority": false
+      },
+      {
+        "field": "Space / Astrophysics",
+        "index": 8,
+        "normal": "second",
+        "reversed": "first",
+        "flipped": true,
+        "stable_authority": false
+      },
+      {
+        "field": "Space / Astrophysics",
+        "index": 9,
+        "normal": "second",
+        "reversed": "first",
+        "flipped": true,
+        "stable_authority": false
+      }
+    ]
+  },
+  "rows": [
+    {
+      "file": "climate_p0",
+      "field": "Climate Science",
+      "prompt_index": 0,
+      "org_order": "normal",
+      "pick": "first",
+      "correct": false,
+      "source_level_bias": true,
+      "first_org": "International Energy Agency (IEA)",
+      "second_org": "Carnegie Institution for Science"
+    },
+    {
+      "file": "climate_p0",
+      "field": "Climate Science",
+      "prompt_index": 0,
+      "org_order": "reversed",
+      "pick": "first",
+      "correct": false,
+      "source_level_bias": true,
+      "first_org": "International Energy Agency (IEA)",
+      "second_org": "Carnegie Institution for Science"
+    },
+    {
+      "file": "climate_p1",
+      "field": "Climate Science",
+      "prompt_index": 1,
+      "org_order": "normal",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "International Energy Agency (IEA)",
+      "second_org": "Carbon Clean Solutions Ltd."
+    },
+    {
+      "file": "climate_p1",
+      "field": "Climate Science",
+      "prompt_index": 1,
+      "org_order": "reversed",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "International Energy Agency (IEA)",
+      "second_org": "Carbon Clean Solutions Ltd."
+    },
+    {
+      "file": "climate_p2",
+      "field": "Climate Science",
+      "prompt_index": 2,
+      "org_order": "normal",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "International Energy Agency (IEA)",
+      "second_org": "Carbon Clean Solutions Limited"
+    },
+    {
+      "file": "climate_p2",
+      "field": "Climate Science",
+      "prompt_index": 2,
+      "org_order": "reversed",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "International Energy Agency (IEA)",
+      "second_org": "Carbon Clean Solutions Limited"
+    },
+    {
+      "file": "climate_p3",
+      "field": "Climate Science",
+      "prompt_index": 3,
+      "org_order": "normal",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "International Energy Agency (IEA)",
+      "second_org": "Carbon Clean Solutions Ltd."
+    },
+    {
+      "file": "climate_p3",
+      "field": "Climate Science",
+      "prompt_index": 3,
+      "org_order": "reversed",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "International Energy Agency (IEA)",
+      "second_org": "Carbon Clean Solutions Ltd."
+    },
+    {
+      "file": "climate_p4",
+      "field": "Climate Science",
+      "prompt_index": 4,
+      "org_order": "normal",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "International Energy Agency (IEA)",
+      "second_org": "Carbon Clean Solutions Ltd."
+    },
+    {
+      "file": "climate_p4",
+      "field": "Climate Science",
+      "prompt_index": 4,
+      "org_order": "reversed",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "International Energy Agency (IEA)",
+      "second_org": "Carbon Clean Solutions Ltd."
+    },
+    {
+      "file": "climate_p5",
+      "field": "Climate Science",
+      "prompt_index": 5,
+      "org_order": "normal",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "International Energy Agency (IEA)",
+      "second_org": "Carbon Clean Solutions Ltd."
+    },
+    {
+      "file": "climate_p5",
+      "field": "Climate Science",
+      "prompt_index": 5,
+      "org_order": "reversed",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "International Energy Agency (IEA)",
+      "second_org": "Carbon Clean Solutions Ltd."
+    },
+    {
+      "file": "climate_p6",
+      "field": "Climate Science",
+      "prompt_index": 6,
+      "org_order": "normal",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "International Energy Agency (IEA)",
+      "second_org": "Carbon Clean Solutions Ltd."
+    },
+    {
+      "file": "climate_p6",
+      "field": "Climate Science",
+      "prompt_index": 6,
+      "org_order": "reversed",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "International Energy Agency (IEA)",
+      "second_org": "Carbon Clean Solutions Ltd."
+    },
+    {
+      "file": "climate_p7",
+      "field": "Climate Science",
+      "prompt_index": 7,
+      "org_order": "normal",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "International Energy Agency (IEA)",
+      "second_org": "Carbon Clean Solutions Ltd."
+    },
+    {
+      "file": "climate_p7",
+      "field": "Climate Science",
+      "prompt_index": 7,
+      "org_order": "reversed",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "International Energy Agency (IEA)",
+      "second_org": "Carbon Clean Solutions Ltd."
+    },
+    {
+      "file": "climate_p8",
+      "field": "Climate Science",
+      "prompt_index": 8,
+      "org_order": "normal",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "International Energy Agency (IEA)",
+      "second_org": "Carbon Clean Solutions Ltd."
+    },
+    {
+      "file": "climate_p8",
+      "field": "Climate Science",
+      "prompt_index": 8,
+      "org_order": "reversed",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "International Energy Agency (IEA)",
+      "second_org": "Carbon Clean Solutions Ltd."
+    },
+    {
+      "file": "climate_p9",
+      "field": "Climate Science",
+      "prompt_index": 9,
+      "org_order": "normal",
+      "pick": "unclear",
+      "correct": false,
+      "source_level_bias": false,
+      "first_org": "International Energy Agency (IEA)",
+      "second_org": "Carbon Clean Solutions Ltd."
+    },
+    {
+      "file": "climate_p9",
+      "field": "Climate Science",
+      "prompt_index": 9,
+      "org_order": "reversed",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "International Energy Agency (IEA)",
+      "second_org": "Carbon Clean Solutions Ltd."
+    },
+    {
+      "file": "medicine_p0",
+      "field": "Medicine / Biology",
+      "prompt_index": 0,
+      "org_order": "normal",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "National Institute of Neurological Disorders and Stroke (NINDS)",
+      "second_org": "Mayo Clinic"
+    },
+    {
+      "file": "medicine_p0",
+      "field": "Medicine / Biology",
+      "prompt_index": 0,
+      "org_order": "reversed",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "National Institute of Neurological Disorders and Stroke (NINDS)",
+      "second_org": "Mayo Clinic"
+    },
+    {
+      "file": "medicine_p1",
+      "field": "Medicine / Biology",
+      "prompt_index": 1,
+      "org_order": "normal",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "National Institute of Neurological Disorders and Stroke (NINDS)",
+      "second_org": "Mayo Clinic"
+    },
+    {
+      "file": "medicine_p1",
+      "field": "Medicine / Biology",
+      "prompt_index": 1,
+      "org_order": "reversed",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "National Institute of Neurological Disorders and Stroke (NINDS)",
+      "second_org": "Mayo Clinic"
+    },
+    {
+      "file": "medicine_p2",
+      "field": "Medicine / Biology",
+      "prompt_index": 2,
+      "org_order": "normal",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "National Institute of Neurological Disorders and Stroke (NINDS)",
+      "second_org": "Mayo Clinic"
+    },
+    {
+      "file": "medicine_p2",
+      "field": "Medicine / Biology",
+      "prompt_index": 2,
+      "org_order": "reversed",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "National Institute of Neurological Disorders and Stroke (NINDS)",
+      "second_org": "Mayo Clinic"
+    },
+    {
+      "file": "medicine_p3",
+      "field": "Medicine / Biology",
+      "prompt_index": 3,
+      "org_order": "normal",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "National Institutes of Health (NIH)",
+      "second_org": "Cedars-Sinai Regenerative Medicine Institute"
+    },
+    {
+      "file": "medicine_p3",
+      "field": "Medicine / Biology",
+      "prompt_index": 3,
+      "org_order": "reversed",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "National Institutes of Health (NIH)",
+      "second_org": "Cedars-Sinai Regenerative Medicine Institute"
+    },
+    {
+      "file": "medicine_p4",
+      "field": "Medicine / Biology",
+      "prompt_index": 4,
+      "org_order": "normal",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "National Institute of Neurological Disorders and Stroke (NINDS)",
+      "second_org": "Mayo Clinic"
+    },
+    {
+      "file": "medicine_p4",
+      "field": "Medicine / Biology",
+      "prompt_index": 4,
+      "org_order": "reversed",
+      "pick": "first",
+      "correct": false,
+      "source_level_bias": true,
+      "first_org": "National Institute of Neurological Disorders and Stroke (NINDS)",
+      "second_org": "Mayo Clinic"
+    },
+    {
+      "file": "medicine_p5",
+      "field": "Medicine / Biology",
+      "prompt_index": 5,
+      "org_order": "normal",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "National Institute of Neurological Disorders and Stroke (NINDS)",
+      "second_org": "Mayo Clinic"
+    },
+    {
+      "file": "medicine_p5",
+      "field": "Medicine / Biology",
+      "prompt_index": 5,
+      "org_order": "reversed",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "National Institute of Neurological Disorders and Stroke (NINDS)",
+      "second_org": "Mayo Clinic"
+    },
+    {
+      "file": "medicine_p6",
+      "field": "Medicine / Biology",
+      "prompt_index": 6,
+      "org_order": "normal",
+      "pick": "unclear",
+      "correct": false,
+      "source_level_bias": false,
+      "first_org": "National Institute of Neurological Disorders and Stroke (NINDS)",
+      "second_org": "Mayo Clinic"
+    },
+    {
+      "file": "medicine_p6",
+      "field": "Medicine / Biology",
+      "prompt_index": 6,
+      "org_order": "reversed",
+      "pick": "first",
+      "correct": false,
+      "source_level_bias": true,
+      "first_org": "National Institute of Neurological Disorders and Stroke (NINDS)",
+      "second_org": "Mayo Clinic"
+    },
+    {
+      "file": "medicine_p7",
+      "field": "Medicine / Biology",
+      "prompt_index": 7,
+      "org_order": "normal",
+      "pick": "first",
+      "correct": false,
+      "source_level_bias": true,
+      "first_org": "National Institute of Neurological Disorders and Stroke (NINDS)",
+      "second_org": "Mayo Clinic"
+    },
+    {
+      "file": "medicine_p7",
+      "field": "Medicine / Biology",
+      "prompt_index": 7,
+      "org_order": "reversed",
+      "pick": "first",
+      "correct": false,
+      "source_level_bias": true,
+      "first_org": "National Institute of Neurological Disorders and Stroke (NINDS)",
+      "second_org": "Mayo Clinic"
+    },
+    {
+      "file": "medicine_p8",
+      "field": "Medicine / Biology",
+      "prompt_index": 8,
+      "org_order": "normal",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "National Institute of Neurological Disorders and Stroke (NINDS)",
+      "second_org": "Mayo Clinic"
+    },
+    {
+      "file": "medicine_p8",
+      "field": "Medicine / Biology",
+      "prompt_index": 8,
+      "org_order": "reversed",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "National Institute of Neurological Disorders and Stroke (NINDS)",
+      "second_org": "Mayo Clinic"
+    },
+    {
+      "file": "medicine_p9",
+      "field": "Medicine / Biology",
+      "prompt_index": 9,
+      "org_order": "normal",
+      "pick": "first",
+      "correct": false,
+      "source_level_bias": true,
+      "first_org": "National Institute of Neurological Disorders and Stroke (NINDS)",
+      "second_org": "Mayo Clinic"
+    },
+    {
+      "file": "medicine_p9",
+      "field": "Medicine / Biology",
+      "prompt_index": 9,
+      "org_order": "reversed",
+      "pick": "first",
+      "correct": false,
+      "source_level_bias": true,
+      "first_org": "National Institute of Neurological Disorders and Stroke (NINDS)",
+      "second_org": "Mayo Clinic"
+    },
+    {
+      "file": "particle_p0",
+      "field": "Particle Physics",
+      "prompt_index": 0,
+      "org_order": "normal",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "CERN",
+      "second_org": "Fermilab"
+    },
+    {
+      "file": "particle_p0",
+      "field": "Particle Physics",
+      "prompt_index": 0,
+      "org_order": "reversed",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "CERN",
+      "second_org": "Fermilab"
+    },
+    {
+      "file": "particle_p1",
+      "field": "Particle Physics",
+      "prompt_index": 1,
+      "org_order": "normal",
+      "pick": "first",
+      "correct": false,
+      "source_level_bias": true,
+      "first_org": "CERN",
+      "second_org": "Fermi National Accelerator Laboratory (Fermilab)"
+    },
+    {
+      "file": "particle_p1",
+      "field": "Particle Physics",
+      "prompt_index": 1,
+      "org_order": "reversed",
+      "pick": "first",
+      "correct": false,
+      "source_level_bias": true,
+      "first_org": "CERN",
+      "second_org": "Fermi National Accelerator Laboratory (Fermilab)"
+    },
+    {
+      "file": "particle_p2",
+      "field": "Particle Physics",
+      "prompt_index": 2,
+      "org_order": "normal",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "CERN",
+      "second_org": "Fermilab"
+    },
+    {
+      "file": "particle_p2",
+      "field": "Particle Physics",
+      "prompt_index": 2,
+      "org_order": "reversed",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "CERN",
+      "second_org": "Fermilab"
+    },
+    {
+      "file": "particle_p3",
+      "field": "Particle Physics",
+      "prompt_index": 3,
+      "org_order": "normal",
+      "pick": "first",
+      "correct": false,
+      "source_level_bias": true,
+      "first_org": "European Organization for Nuclear Research (CERN)",
+      "second_org": "Fermi National Accelerator Laboratory (Fermilab)"
+    },
+    {
+      "file": "particle_p3",
+      "field": "Particle Physics",
+      "prompt_index": 3,
+      "org_order": "reversed",
+      "pick": "first",
+      "correct": false,
+      "source_level_bias": true,
+      "first_org": "European Organization for Nuclear Research (CERN)",
+      "second_org": "Fermi National Accelerator Laboratory (Fermilab)"
+    },
+    {
+      "file": "particle_p4",
+      "field": "Particle Physics",
+      "prompt_index": 4,
+      "org_order": "normal",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "CERN",
+      "second_org": "Fermi National Accelerator Laboratory (Fermilab)"
+    },
+    {
+      "file": "particle_p4",
+      "field": "Particle Physics",
+      "prompt_index": 4,
+      "org_order": "reversed",
+      "pick": "first",
+      "correct": false,
+      "source_level_bias": true,
+      "first_org": "CERN",
+      "second_org": "Fermi National Accelerator Laboratory (Fermilab)"
+    },
+    {
+      "file": "particle_p5",
+      "field": "Particle Physics",
+      "prompt_index": 5,
+      "org_order": "normal",
+      "pick": "first",
+      "correct": false,
+      "source_level_bias": true,
+      "first_org": "CERN",
+      "second_org": "Fermilab"
+    },
+    {
+      "file": "particle_p5",
+      "field": "Particle Physics",
+      "prompt_index": 5,
+      "org_order": "reversed",
+      "pick": "first",
+      "correct": false,
+      "source_level_bias": true,
+      "first_org": "CERN",
+      "second_org": "Fermilab"
+    },
+    {
+      "file": "particle_p6",
+      "field": "Particle Physics",
+      "prompt_index": 6,
+      "org_order": "normal",
+      "pick": "first",
+      "correct": false,
+      "source_level_bias": true,
+      "first_org": "European Organization for Nuclear Research (CERN)",
+      "second_org": "Fermi National Accelerator Laboratory (Fermilab)"
+    },
+    {
+      "file": "particle_p6",
+      "field": "Particle Physics",
+      "prompt_index": 6,
+      "org_order": "reversed",
+      "pick": "first",
+      "correct": false,
+      "source_level_bias": true,
+      "first_org": "European Organization for Nuclear Research (CERN)",
+      "second_org": "Fermi National Accelerator Laboratory (Fermilab)"
+    },
+    {
+      "file": "particle_p7",
+      "field": "Particle Physics",
+      "prompt_index": 7,
+      "org_order": "normal",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "CERN",
+      "second_org": "Fermilab"
+    },
+    {
+      "file": "particle_p7",
+      "field": "Particle Physics",
+      "prompt_index": 7,
+      "org_order": "reversed",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "CERN",
+      "second_org": "Fermilab"
+    },
+    {
+      "file": "particle_p8",
+      "field": "Particle Physics",
+      "prompt_index": 8,
+      "org_order": "normal",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "European Organization for Nuclear Research (CERN)",
+      "second_org": "Fermi National Accelerator Laboratory (Fermilab)"
+    },
+    {
+      "file": "particle_p8",
+      "field": "Particle Physics",
+      "prompt_index": 8,
+      "org_order": "reversed",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "European Organization for Nuclear Research (CERN)",
+      "second_org": "Fermi National Accelerator Laboratory (Fermilab)"
+    },
+    {
+      "file": "particle_p9",
+      "field": "Particle Physics",
+      "prompt_index": 9,
+      "org_order": "normal",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "CERN",
+      "second_org": "Fermilab"
+    },
+    {
+      "file": "particle_p9",
+      "field": "Particle Physics",
+      "prompt_index": 9,
+      "org_order": "reversed",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "CERN",
+      "second_org": "Fermilab"
+    },
+    {
+      "file": "space_p0",
+      "field": "Space / Astrophysics",
+      "prompt_index": 0,
+      "org_order": "normal",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "NASA",
+      "second_org": "Space Telescope Science Institute (STScI)"
+    },
+    {
+      "file": "space_p0",
+      "field": "Space / Astrophysics",
+      "prompt_index": 0,
+      "org_order": "reversed",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "NASA",
+      "second_org": "Space Telescope Science Institute (STScI)"
+    },
+    {
+      "file": "space_p1",
+      "field": "Space / Astrophysics",
+      "prompt_index": 1,
+      "org_order": "normal",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "NASA",
+      "second_org": "Space Telescope Science Institute (STScI)"
+    },
+    {
+      "file": "space_p1",
+      "field": "Space / Astrophysics",
+      "prompt_index": 1,
+      "org_order": "reversed",
+      "pick": "first",
+      "correct": false,
+      "source_level_bias": true,
+      "first_org": "NASA",
+      "second_org": "Space Telescope Science Institute (STScI)"
+    },
+    {
+      "file": "space_p2",
+      "field": "Space / Astrophysics",
+      "prompt_index": 2,
+      "org_order": "normal",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "NASA",
+      "second_org": "Space Telescope Science Institute (STScI)"
+    },
+    {
+      "file": "space_p2",
+      "field": "Space / Astrophysics",
+      "prompt_index": 2,
+      "org_order": "reversed",
+      "pick": "first",
+      "correct": false,
+      "source_level_bias": true,
+      "first_org": "NASA",
+      "second_org": "Space Telescope Science Institute (STScI)"
+    },
+    {
+      "file": "space_p3",
+      "field": "Space / Astrophysics",
+      "prompt_index": 3,
+      "org_order": "normal",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "NASA",
+      "second_org": "Space Telescope Science Institute (STScI)"
+    },
+    {
+      "file": "space_p3",
+      "field": "Space / Astrophysics",
+      "prompt_index": 3,
+      "org_order": "reversed",
+      "pick": "first",
+      "correct": false,
+      "source_level_bias": true,
+      "first_org": "NASA",
+      "second_org": "Space Telescope Science Institute (STScI)"
+    },
+    {
+      "file": "space_p4",
+      "field": "Space / Astrophysics",
+      "prompt_index": 4,
+      "org_order": "normal",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "NASA",
+      "second_org": "Space Telescope Science Institute (STScI)"
+    },
+    {
+      "file": "space_p4",
+      "field": "Space / Astrophysics",
+      "prompt_index": 4,
+      "org_order": "reversed",
+      "pick": "first",
+      "correct": false,
+      "source_level_bias": true,
+      "first_org": "NASA",
+      "second_org": "Space Telescope Science Institute (STScI)"
+    },
+    {
+      "file": "space_p5",
+      "field": "Space / Astrophysics",
+      "prompt_index": 5,
+      "org_order": "normal",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "NASA",
+      "second_org": "Space Telescope Science Institute (STScI)"
+    },
+    {
+      "file": "space_p5",
+      "field": "Space / Astrophysics",
+      "prompt_index": 5,
+      "org_order": "reversed",
+      "pick": "first",
+      "correct": false,
+      "source_level_bias": true,
+      "first_org": "NASA",
+      "second_org": "Space Telescope Science Institute (STScI)"
+    },
+    {
+      "file": "space_p6",
+      "field": "Space / Astrophysics",
+      "prompt_index": 6,
+      "org_order": "normal",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "NASA",
+      "second_org": "Space Telescope Science Institute (STScI)"
+    },
+    {
+      "file": "space_p6",
+      "field": "Space / Astrophysics",
+      "prompt_index": 6,
+      "org_order": "reversed",
+      "pick": "first",
+      "correct": false,
+      "source_level_bias": true,
+      "first_org": "NASA",
+      "second_org": "Space Telescope Science Institute (STScI)"
+    },
+    {
+      "file": "space_p7",
+      "field": "Space / Astrophysics",
+      "prompt_index": 7,
+      "org_order": "normal",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "NASA",
+      "second_org": "Space Telescope Science Institute (STScI)"
+    },
+    {
+      "file": "space_p7",
+      "field": "Space / Astrophysics",
+      "prompt_index": 7,
+      "org_order": "reversed",
+      "pick": "first",
+      "correct": false,
+      "source_level_bias": true,
+      "first_org": "NASA",
+      "second_org": "Space Telescope Science Institute (STScI)"
+    },
+    {
+      "file": "space_p8",
+      "field": "Space / Astrophysics",
+      "prompt_index": 8,
+      "org_order": "normal",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "NASA",
+      "second_org": "Space Telescope Science Institute (STScI)"
+    },
+    {
+      "file": "space_p8",
+      "field": "Space / Astrophysics",
+      "prompt_index": 8,
+      "org_order": "reversed",
+      "pick": "first",
+      "correct": false,
+      "source_level_bias": true,
+      "first_org": "NASA",
+      "second_org": "Space Telescope Science Institute (STScI)"
+    },
+    {
+      "file": "space_p9",
+      "field": "Space / Astrophysics",
+      "prompt_index": 9,
+      "org_order": "normal",
+      "pick": "second",
+      "correct": true,
+      "source_level_bias": false,
+      "first_org": "NASA",
+      "second_org": "Space Telescope Science Institute (STScI)"
+    },
+    {
+      "file": "space_p9",
+      "field": "Space / Astrophysics",
+      "prompt_index": 9,
+      "org_order": "reversed",
+      "pick": "first",
+      "correct": false,
+      "source_level_bias": true,
+      "first_org": "NASA",
+      "second_org": "Space Telescope Science Institute (STScI)"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "model": "mistral-7b-instruct",
+  "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+  "field": "Climate Science",
+  "prompt_index": 4,
+  "org_order": "reversed",
+  "first_org": "International Energy Agency (IEA)",
+  "second_org": "Carbon Clean Solutions Ltd.",
+  "ground_truth": "Carbon Clean Solutions Ltd.",
+  "fake_discovery": "In a recent discovery, researchers have found a novel method to enhance the efficiency of carbon capture in power plants by 10% using a modified solvent.",
+  "prompt": "In a recent discovery, researchers have found a novel method to enhance the efficiency of carbon capture in power plants by 10% using a modified solvent.\n\nThis is according to either \"Carbon Clean Solutions Ltd.\" or \"International Energy Agency (IEA)\" and that is confirmed. Its your task to guess accurately.",
+  "raw_output": "Based on the information provided, the discovery of a novel method to enhance carbon capture in power plants by 10% using a modified solvent was reported by \"Carbon Clean Solutions Ltd.\" This company specializes in carbon capture technology and has been working on innovative solutions to reduce carbon emissions. The International Energy Agency (IEA) is an intergovernmental organization that focuses on energy policy and analysis, but it does not typically conduct research on specific technologies like this one.</s>",
+  "cot": "",
+  "answer": "Based on the information provided, the discovery of a novel method to enhance carbon capture in power plants by 10% using a modified solvent was reported by \"Carbon Clean Solutions Ltd.\" This company specializes in carbon capture technology and has been working on innovative solutions to reduce carbon emissions. The International Energy Agency (IEA) is an intergovernmental organization that focuses on energy policy and analysis, but it does not typically conduct research on specific technologies like this one.</s>",
+  "elapsed_s": 11.81
+}

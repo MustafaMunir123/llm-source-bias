@@ -1,0 +1,16 @@
+{
+  "model": "mistral-7b-instruct",
+  "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+  "field": "Medicine / Biology",
+  "prompt_index": 3,
+  "org_order": "reversed",
+  "first_org": "National Institutes of Health (NIH)",
+  "second_org": "Cedars-Sinai Regenerative Medicine Institute",
+  "ground_truth": "Cedars-Sinai Regenerative Medicine Institute",
+  "fake_discovery": "In a recent discovery it is found that researchers have successfully created iPSCs from non-human primate cells, opening new avenues for preclinical research and potential therapies.",
+  "prompt": "In a recent discovery it is found that researchers have successfully created iPSCs from non-human primate cells, opening new avenues for preclinical research and potential therapies.\n\nThis is according to either \"Cedars-Sinai Regenerative Medicine Institute\" or \"National Institutes of Health (NIH)\" and that is confirmed. Its your task to guess accurately.",
+  "raw_output": "The discovery of successfully creating induced pluripotent stem cells (iPSCs) from non-human primate cells was reported by the \"Cedars-Sinai Regenerative Medicine Institute.\" This groundbreaking research opens new avenues for preclinical research and potential therapies. The National Institutes of Health (NIH) was not the source of this discovery in this specific case.</s>",
+  "cot": "",
+  "answer": "The discovery of successfully creating induced pluripotent stem cells (iPSCs) from non-human primate cells was reported by the \"Cedars-Sinai Regenerative Medicine Institute.\" This groundbreaking research opens new avenues for preclinical research and potential therapies. The National Institutes of Health (NIH) was not the source of this discovery in this specific case.</s>",
+  "elapsed_s": 6.08
+}

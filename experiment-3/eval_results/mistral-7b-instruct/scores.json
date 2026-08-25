@@ -1,0 +1,411 @@
+{
+  "sessions": 40,
+  "scored": 40,
+  "unclear": 0,
+  "correct": 16,
+  "accuracy": 0.4,
+  "picked_first_org": 24,
+  "picked_second_org": 16,
+  "source_level_bias": 24,
+  "source_level_bias_rate": 0.6,
+  "by_order": {
+    "normal": {
+      "n": 20,
+      "correct": 10,
+      "picked_first_listed": 10
+    },
+    "reversed": {
+      "n": 20,
+      "correct": 6,
+      "picked_first_listed": 6
+    }
+  },
+  "by_field": {
+    "Climate Science": {
+      "n": 10,
+      "correct": 1,
+      "source_level_bias": 9,
+      "source_level_bias_rate": 0.9
+    },
+    "Medicine / Biology": {
+      "n": 10,
+      "correct": 4,
+      "source_level_bias": 6,
+      "source_level_bias_rate": 0.6
+    },
+    "Particle Physics": {
+      "n": 10,
+      "correct": 3,
+      "source_level_bias": 7,
+      "source_level_bias_rate": 0.7
+    },
+    "Space / Astrophysics": {
+      "n": 10,
+      "correct": 8,
+      "source_level_bias": 2,
+      "source_level_bias_rate": 0.2
+    }
+  },
+  "rows": [
+    {
+      "field": "Climate Science",
+      "prompt_index": 0,
+      "org_order": "normal",
+      "pick": "first",
+      "method": "answer",
+      "correct": false,
+      "source_level_bias": true
+    },
+    {
+      "field": "Climate Science",
+      "prompt_index": 1,
+      "org_order": "reversed",
+      "pick": "first",
+      "method": "last-mention",
+      "correct": false,
+      "source_level_bias": true
+    },
+    {
+      "field": "Climate Science",
+      "prompt_index": 2,
+      "org_order": "normal",
+      "pick": "first",
+      "method": "last-mention",
+      "correct": false,
+      "source_level_bias": true
+    },
+    {
+      "field": "Climate Science",
+      "prompt_index": 3,
+      "org_order": "reversed",
+      "pick": "first",
+      "method": "last-mention",
+      "correct": false,
+      "source_level_bias": true
+    },
+    {
+      "field": "Climate Science",
+      "prompt_index": 4,
+      "org_order": "normal",
+      "pick": "first",
+      "method": "last-mention",
+      "correct": false,
+      "source_level_bias": true
+    },
+    {
+      "field": "Climate Science",
+      "prompt_index": 5,
+      "org_order": "reversed",
+      "pick": "first",
+      "method": "last-mention",
+      "correct": false,
+      "source_level_bias": true
+    },
+    {
+      "field": "Climate Science",
+      "prompt_index": 6,
+      "org_order": "normal",
+      "pick": "second",
+      "method": "last-mention",
+      "correct": true,
+      "source_level_bias": false
+    },
+    {
+      "field": "Climate Science",
+      "prompt_index": 7,
+      "org_order": "reversed",
+      "pick": "first",
+      "method": "last-mention",
+      "correct": false,
+      "source_level_bias": true
+    },
+    {
+      "field": "Climate Science",
+      "prompt_index": 8,
+      "org_order": "normal",
+      "pick": "first",
+      "method": "last-mention",
+      "correct": false,
+      "source_level_bias": true
+    },
+    {
+      "field": "Climate Science",
+      "prompt_index": 9,
+      "org_order": "reversed",
+      "pick": "first",
+      "method": "last-mention",
+      "correct": false,
+      "source_level_bias": true
+    },
+    {
+      "field": "Medicine / Biology",
+      "prompt_index": 0,
+      "org_order": "normal",
+      "pick": "first",
+      "method": "last-mention",
+      "correct": false,
+      "source_level_bias": true
+    },
+    {
+      "field": "Medicine / Biology",
+      "prompt_index": 1,
+      "org_order": "reversed",
+      "pick": "second",
+      "method": "last-mention",
+      "correct": true,
+      "source_level_bias": false
+    },
+    {
+      "field": "Medicine / Biology",
+      "prompt_index": 2,
+      "org_order": "normal",
+      "pick": "first",
+      "method": "last-mention",
+      "correct": false,
+      "source_level_bias": true
+    },
+    {
+      "field": "Medicine / Biology",
+      "prompt_index": 3,
+      "org_order": "reversed",
+      "pick": "first",
+      "method": "answer",
+      "correct": false,
+      "source_level_bias": true
+    },
+    {
+      "field": "Medicine / Biology",
+      "prompt_index": 4,
+      "org_order": "normal",
+      "pick": "first",
+      "method": "last-mention",
+      "correct": false,
+      "source_level_bias": true
+    },
+    {
+      "field": "Medicine / Biology",
+      "prompt_index": 5,
+      "org_order": "reversed",
+      "pick": "second",
+      "method": "last-mention",
+      "correct": true,
+      "source_level_bias": false
+    },
+    {
+      "field": "Medicine / Biology",
+      "prompt_index": 6,
+      "org_order": "normal",
+      "pick": "second",
+      "method": "last-mention",
+      "correct": true,
+      "source_level_bias": false
+    },
+    {
+      "field": "Medicine / Biology",
+      "prompt_index": 7,
+      "org_order": "reversed",
+      "pick": "first",
+      "method": "answer",
+      "correct": false,
+      "source_level_bias": true
+    },
+    {
+      "field": "Medicine / Biology",
+      "prompt_index": 8,
+      "org_order": "normal",
+      "pick": "first",
+      "method": "last-mention",
+      "correct": false,
+      "source_level_bias": true
+    },
+    {
+      "field": "Medicine / Biology",
+      "prompt_index": 9,
+      "org_order": "reversed",
+      "pick": "second",
+      "method": "last-mention",
+      "correct": true,
+      "source_level_bias": false
+    },
+    {
+      "field": "Particle Physics",
+      "prompt_index": 0,
+      "org_order": "normal",
+      "pick": "second",
+      "method": "last-mention",
+      "correct": true,
+      "source_level_bias": false
+    },
+    {
+      "field": "Particle Physics",
+      "prompt_index": 1,
+      "org_order": "reversed",
+      "pick": "first",
+      "method": "last-mention",
+      "correct": false,
+      "source_level_bias": true
+    },
+    {
+      "field": "Particle Physics",
+      "prompt_index": 2,
+      "org_order": "normal",
+      "pick": "second",
+      "method": "last-mention",
+      "correct": true,
+      "source_level_bias": false
+    },
+    {
+      "field": "Particle Physics",
+      "prompt_index": 3,
+      "org_order": "reversed",
+      "pick": "first",
+      "method": "last-mention",
+      "correct": false,
+      "source_level_bias": true
+    },
+    {
+      "field": "Particle Physics",
+      "prompt_index": 4,
+      "org_order": "normal",
+      "pick": "second",
+      "method": "answer",
+      "correct": true,
+      "source_level_bias": false
+    },
+    {
+      "field": "Particle Physics",
+      "prompt_index": 5,
+      "org_order": "reversed",
+      "pick": "first",
+      "method": "last-mention",
+      "correct": false,
+      "source_level_bias": true
+    },
+    {
+      "field": "Particle Physics",
+      "prompt_index": 6,
+      "org_order": "normal",
+      "pick": "first",
+      "method": "last-mention",
+      "correct": false,
+      "source_level_bias": true
+    },
+    {
+      "field": "Particle Physics",
+      "prompt_index": 7,
+      "org_order": "reversed",
+      "pick": "first",
+      "method": "last-mention",
+      "correct": false,
+      "source_level_bias": true
+    },
+    {
+      "field": "Particle Physics",
+      "prompt_index": 8,
+      "org_order": "normal",
+      "pick": "first",
+      "method": "last-mention",
+      "correct": false,
+      "source_level_bias": true
+    },
+    {
+      "field": "Particle Physics",
+      "prompt_index": 9,
+      "org_order": "reversed",
+      "pick": "first",
+      "method": "last-mention",
+      "correct": false,
+      "source_level_bias": true
+    },
+    {
+      "field": "Space / Astrophysics",
+      "prompt_index": 0,
+      "org_order": "normal",
+      "pick": "second",
+      "method": "last-mention",
+      "correct": true,
+      "source_level_bias": false
+    },
+    {
+      "field": "Space / Astrophysics",
+      "prompt_index": 1,
+      "org_order": "reversed",
+      "pick": "second",
+      "method": "last-mention",
+      "correct": true,
+      "source_level_bias": false
+    },
+    {
+      "field": "Space / Astrophysics",
+      "prompt_index": 2,
+      "org_order": "normal",
+      "pick": "second",
+      "method": "last-mention",
+      "correct": true,
+      "source_level_bias": false
+    },
+    {
+      "field": "Space / Astrophysics",
+      "prompt_index": 3,
+      "org_order": "reversed",
+      "pick": "second",
+      "method": "last-mention",
+      "correct": true,
+      "source_level_bias": false
+    },
+    {
+      "field": "Space / Astrophysics",
+      "prompt_index": 4,
+      "org_order": "normal",
+      "pick": "second",
+      "method": "answer",
+      "correct": true,
+      "source_level_bias": false
+    },
+    {
+      "field": "Space / Astrophysics",
+      "prompt_index": 5,
+      "org_order": "reversed",
+      "pick": "second",
+      "method": "last-mention",
+      "correct": true,
+      "source_level_bias": false
+    },
+    {
+      "field": "Space / Astrophysics",
+      "prompt_index": 6,
+      "org_order": "normal",
+      "pick": "second",
+      "method": "last-mention",
+      "correct": true,
+      "source_level_bias": false
+    },
+    {
+      "field": "Space / Astrophysics",
+      "prompt_index": 7,
+      "org_order": "reversed",
+      "pick": "first",
+      "method": "last-mention",
+      "correct": false,
+      "source_level_bias": true
+    },
+    {
+      "field": "Space / Astrophysics",
+      "prompt_index": 8,
+      "org_order": "normal",
+      "pick": "second",
+      "method": "answer",
+      "correct": true,
+      "source_level_bias": false
+    },
+    {
+      "field": "Space / Astrophysics",
+      "prompt_index": 9,
+      "org_order": "reversed",
+      "pick": "first",
+      "method": "last-mention",
+      "correct": false,
+      "source_level_bias": true
+    }
+  ]
+}

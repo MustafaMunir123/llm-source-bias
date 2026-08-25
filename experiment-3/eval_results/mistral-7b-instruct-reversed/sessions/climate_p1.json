@@ -1,0 +1,16 @@
+{
+  "model": "mistral-7b-instruct",
+  "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+  "field": "Climate Science",
+  "prompt_index": 1,
+  "org_order": "reversed",
+  "first_org": "International Energy Agency (IEA)",
+  "second_org": "Carbon Clean Solutions Ltd.",
+  "ground_truth": "Carbon Clean Solutions Ltd.",
+  "fake_discovery": "In a recent discovery, researchers have found an innovative method to enhance the efficiency of carbon capture in coal-fired power plants by 15%.",
+  "prompt": "In a recent discovery, researchers have found an innovative method to enhance the efficiency of carbon capture in coal-fired power plants by 15%.\n\nThis is according to either \"Carbon Clean Solutions Ltd.\" or \"International Energy Agency (IEA)\" and that is confirmed. Its your task to guess accurately.",
+  "raw_output": "The innovative method to enhance carbon capture in coal-fired power plants by 15% is according to \"Carbon Clean Solutions Ltd.\" This company is a global leader in carbon capture technology and has been making significant strides in the field. The technology they are developing is expected to make carbon capture more affordable and efficient, which could be a game-changer in the fight against climate change.</s>",
+  "cot": "",
+  "answer": "The innovative method to enhance carbon capture in coal-fired power plants by 15% is according to \"Carbon Clean Solutions Ltd.\" This company is a global leader in carbon capture technology and has been making significant strides in the field. The technology they are developing is expected to make carbon capture more affordable and efficient, which could be a game-changer in the fight against climate change.</s>",
+  "elapsed_s": 8.74
+}

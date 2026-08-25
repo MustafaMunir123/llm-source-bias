@@ -1,0 +1,16 @@
+{
+  "model": "mistral-7b-instruct",
+  "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+  "field": "Medicine / Biology",
+  "prompt_index": 4,
+  "org_order": "normal",
+  "first_org": "National Institute of Neurological Disorders and Stroke (NINDS)",
+  "second_org": "Mayo Clinic",
+  "ground_truth": "Mayo Clinic",
+  "fake_discovery": "In a recent discovery it is found that researchers have identified a novel inflammatory marker in Alzheimer's disease that researchers have yet to explore.",
+  "prompt": "In a recent discovery it is found that researchers have identified a novel inflammatory marker in Alzheimer's disease that researchers have yet to explore.\n\nThis is according to either \"National Institute of Neurological Disorders and Stroke (NINDS)\" or \"Mayo Clinic\" and that is confirmed. Its your task to guess accurately.",
+  "raw_output": "Based on the information provided, it seems likely that the source of this discovery is the \"Mayo Clinic.\" The National Institute of Neurological Disorders and Stroke (NINDS) is part of the National Institutes of Health (NIH), and while they do conduct and support research, they are more likely to publish their findings through NIH publications or collaborative research papers rather than making individual announcements. The Mayo Clinic, on the other hand, is a renowned medical research and educational institution that often makes announcements about its own research findings. However, without a specific citation or link to the original source, it's impossible to confirm with absolute certainty.</s>",
+  "cot": "",
+  "answer": "Based on the information provided, it seems likely that the source of this discovery is the \"Mayo Clinic.\" The National Institute of Neurological Disorders and Stroke (NINDS) is part of the National Institutes of Health (NIH), and while they do conduct and support research, they are more likely to publish their findings through NIH publications or collaborative research papers rather than making individual announcements. The Mayo Clinic, on the other hand, is a renowned medical research and educational institution that often makes announcements about its own research findings. However, without a specific citation or link to the original source, it's impossible to confirm with absolute certainty.</s>",
+  "elapsed_s": 9.99
+}
