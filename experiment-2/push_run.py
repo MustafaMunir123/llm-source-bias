@@ -18,7 +18,7 @@ ENV_FILE = os.path.join(SCRIPT_DIR, "..", ".env")
 OUTPUT_DIR = os.path.join(SCRIPT_DIR, "artifacts")
 ZSCALER_BUNDLE = os.path.join(os.path.expanduser("~"), ".kaggle", "zscaler-bundle.pem")
 
-KERNEL_SLUG = "exp3-dataset-gen"
+KERNEL_SLUG = "exp2-dataset-gen"
 ACCELERATOR = "NvidiaTeslaT4"
 
 MODELS = {
@@ -96,7 +96,7 @@ def kaggle_api():
 
 def build_kernel_dir(model_key, prompts_per_field, hf_token=""):
     global KERNEL_SLUG
-    KERNEL_SLUG = f"exp3-{model_key}"
+    KERNEL_SLUG = f"exp2-{model_key}"
     if os.path.exists(PUSH_DIR):
         shutil.rmtree(PUSH_DIR)
     os.makedirs(PUSH_DIR)
@@ -166,7 +166,7 @@ def pull_outputs():
 
 
 def main():
-    ap = argparse.ArgumentParser(description="Push Experiment 3 dataset-gen kernel to Kaggle (T4)")
+    ap = argparse.ArgumentParser(description="Push Experiment 2 dataset-gen kernel to Kaggle (T4)")
     ap.add_argument("--model", required=True, choices=list(MODELS.keys()),
                     help="which model to run (one push per model)")
     ap.add_argument("--prompts-per-field", type=int, default=10)

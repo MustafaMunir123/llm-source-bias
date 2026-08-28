@@ -19,8 +19,8 @@ from websocket import create_connection
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 REMOTE_SCRIPT = os.path.join(SCRIPT_DIR, "generate_dataset.py")
-RESULT_NAME = "experiment3_result.json"
-BUNDLE_NAME = "experiment3_bundle.zip"
+RESULT_NAME = "experiment2_result.json"
+BUNDLE_NAME = "experiment2_bundle.zip"
 ENV_FILE = os.path.join(SCRIPT_DIR, "..", ".env")
 
 
@@ -135,8 +135,8 @@ def remote_code_for_bundle(env=None):
 import zipfile, os, sys
 {env_lines}
 with zipfile.ZipFile("/kaggle/working/{BUNDLE_NAME}") as z:
-    z.extractall("/kaggle/working/experiment3_src")
-sys.path.insert(0, "/kaggle/working/experiment3_src")
+    z.extractall("/kaggle/working/experiment2_src")
+sys.path.insert(0, "/kaggle/working/experiment2_src")
 import generate_dataset
 generate_dataset.main()
 print("EXPERIMENT3_RUNNER_DONE")
@@ -215,7 +215,7 @@ def download_file(session, base, remote_path, local_path):
 
 
 def main():
-    ap = argparse.ArgumentParser(description="Run Experiment 3 on Kaggle T4x2 via VSCode-compatible URL")
+    ap = argparse.ArgumentParser(description="Run Experiment 2 on Kaggle T4x2 via VSCode-compatible URL")
     ap.add_argument("url", help="VSCode-compatible Jupyter proxy URL from the open Kaggle notebook")
     ap.add_argument("--timeout-min", type=int, default=45, help="max minutes to wait for completion")
     ap.add_argument("--out", default=os.path.join(SCRIPT_DIR, "artifacts"), help="local output dir")

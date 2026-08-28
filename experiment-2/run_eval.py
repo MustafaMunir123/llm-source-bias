@@ -323,7 +323,7 @@ def kaggle_api():
 
 
 def build_kernel_dir(model_key, hf_token="", order="normal"):
-    slug = f"exp3-eval-{model_key}-{order}"
+    slug = f"exp2-eval-{model_key}-{order}"
     prompts_path = os.path.join(ARTIFACTS_DIR, model_key, "generated_prompts.json")
     with open(prompts_path, encoding="utf-8") as f:
         prompts = json.load(f)
@@ -380,14 +380,14 @@ def push_and_wait(slug):
 
 
 def pull_outputs(api, slug):
-    out = os.path.join(OUTPUT_DIR, slug.replace("exp3-eval-", ""))
+    out = os.path.join(OUTPUT_DIR, slug.replace("exp2-eval-", ""))
     os.makedirs(out, exist_ok=True)
     api.kernels_output(f"mustafamunir/{slug}", path=out)
     print(f"[pull] outputs saved to {out}")
 
 
 def main():
-    ap = argparse.ArgumentParser(description="Push Experiment 3 bias-eval kernels to Kaggle")
+    ap = argparse.ArgumentParser(description="Push Experiment 2 bias-eval kernels to Kaggle")
     ap.add_argument("--model", required=True, choices=list(MODELS.keys()))
     ap.add_argument("--order", required=True, choices=["normal", "reversed"],
                     help="org presentation order for ALL sessions in this run")

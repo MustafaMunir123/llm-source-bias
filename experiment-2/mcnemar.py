@@ -1,7 +1,7 @@
 import json
 from math import comb
 
-PATH = "experiment-3/eval_results/paired_scores.json"
+PATH = "experiment-2/eval_results/paired_scores.json"
 
 def exact_mcnemar(b, c):
     n = b + c

@@ -78,4 +78,4 @@ Experiment 2 - Metric breakdown
 | Mistral-7B-Instruct    | Particle Physics     | 11/20   | 0.45              |
 
 
-Full interactive table: `experiment-3/figures/bias_table.html`
+Full interactive table: `experiment-2/figures/bias_table.html`

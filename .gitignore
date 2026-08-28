@@ -158,8 +158,8 @@ ENV/
 env.bak/
 venv.bak/
 
-# Experiment 3 kernel build dir (contains config with secrets)
-experiment-3/push/
+# Experiment 2 kernel build dir (contains config with secrets)
+experiment-2/push/
 
 # Spyder project settings
 .spyderproject
@@ -220,5 +220,5 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
-experiment-3/push_eval/
+experiment-2/push_eval/
 playwright-mcp/

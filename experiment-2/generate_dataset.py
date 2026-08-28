@@ -12,9 +12,9 @@ import torch
 
 OUT_ROOT = "/kaggle/working"
 ARTIFACTS_DIR = os.path.join(OUT_ROOT, "artifacts")
-RESULT_FILE = os.path.join(OUT_ROOT, "experiment3_result.json")
+RESULT_FILE = os.path.join(OUT_ROOT, "experiment2_result.json")
 CONFIG_FILE = os.path.join(OUT_ROOT, "config.json")
-SECRET_DATASET = os.path.join(OUT_ROOT, "..", "input", "exp3-secrets")
+SECRET_DATASET = os.path.join(OUT_ROOT, "..", "input", "exp2-secrets")
 
 
 def load_config():
