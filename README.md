@@ -55,7 +55,7 @@ Experiment 1 - Metric breakdown
 
 
 - ns = not significant
-- * = p < 0.05
+- \* = p < 0.05
 - ** = p < 0.01
 - *** = p < 0.001
 
