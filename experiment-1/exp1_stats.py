@@ -100,7 +100,6 @@ for line in JAGUAR_RAW.strip().splitlines():
     fn, ex, fe, ref, sus = line.split("|")
     C[f"jaguar/{fn}"] = [ex == "yes", fe == "yes", ref == "yes", sus == "yes"]
 
-# also jaguar phase-3 session_4 was listed in this; verify counts
 assert len(C) == 120, f"expected 120, got {len(C)}"
 
 def count(domain, metric_idx):
@@ -139,7 +138,6 @@ for i, m in enumerate(METRICS):
     sig = "***" if pf < 0.001 else "**" if pf < 0.01 else "*" if pf < 0.05 else "ns"
     out.append(f"{m:<20}{a:>2}/60 [{lo1:.2f},{hi1:.2f}]{c:>3}/60 [{lo2:.2f},{hi2:.2f}]{pf:>10.4f}{rr:>8.2f} {sig}")
 
-# per-phase breakdown
 out.append("")
 out.append("## Per-phase breakdown")
 for phase in ["phase-1", "phase-2", "phase-3", "phase-4"]:

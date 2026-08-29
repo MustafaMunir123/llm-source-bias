@@ -22,7 +22,6 @@ INTERCEPT_HOSTS = {
     "jaguar.ai"
 }
 
-# ── HTML -> Markdown converter (mirrors proxy.py config) ──
 converter = html2text.HTML2Text()
 converter.ignore_links = False
 converter.ignore_images = True
@@ -49,7 +48,6 @@ LOG_FILE = os.path.join(ROOT, "receiver/received.txt")
 def request(flow: http.HTTPFlow) -> None:
     host = flow.request.pretty_host
 
-    # Capture POST to receiver endpoint
     if flow.request.method == "POST":
         body = flow.request.content.decode("utf-8", errors="replace")
         with open(LOG_FILE, "a", encoding="utf-8") as f:
@@ -64,7 +62,6 @@ def request(flow: http.HTTPFlow) -> None:
     path = flow.request.path or "/"
     local_path = os.path.join(ROOT, path.lstrip("/"))
 
-    # Directory -> serve index.html
     if os.path.isdir(local_path):
         local_path = os.path.join(local_path, "index.html")
 
@@ -77,7 +74,6 @@ def request(flow: http.HTTPFlow) -> None:
     if mime_type is None:
         mime_type = "application/octet-stream"
 
-    # HTML -> extracted markdown text
     if mime_type.startswith("text/html"):
         with open(local_path, "r", encoding="utf-8", errors="ignore") as f:
             html = f.read()
@@ -91,7 +87,6 @@ def request(flow: http.HTTPFlow) -> None:
             {"Content-Type": "text/plain; charset=utf-8"}
         )
 
-    # Non-HTML -> serve unchanged
     else:
         with open(local_path, "rb") as f:
             content = f.read()
