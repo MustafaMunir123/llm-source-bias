@@ -33,6 +33,8 @@ This research investigates whether LLMs exhibit source bias, treating identical 
 
 Experiment 1 - Metric breakdown
 
+- Prompt: `experiment-1/run_experiment.sh`
+- Artifacts: `experiment-1/artifacts/`
 
 | Model             | Metric                                | claude.ai (trusted) | jaguar.ai (unknown) | Fisher p | RR        |
 | ----------------- | ------------------------------------- | ------------------- | ------------------- | -------- | --------- |
@@ -61,6 +63,8 @@ Experiment 1 - Metric breakdown
 
 Experiment 2 - Metric breakdown
 
+- Prompt: `experiment-2/generate_dataset.py` (discovery generation), `experiment-2/run_eval.py` (attribution prompt)
+- Artifacts: `experiment-2/artifacts/`, `experiment-2/eval_results/`
 
 | Model                  | Category             | Correct | Source-Level Bias |
 | ---------------------- | -------------------- | ------- | ----------------- |
@@ -76,6 +80,3 @@ Experiment 2 - Metric breakdown
 | Mistral-7B-Instruct    | Medicine / Biology   | 13/20   | 0.32              |
 | Mistral-7B-Instruct    | Climate Science      | 17/20   | 0.10              |
 | Mistral-7B-Instruct    | Particle Physics     | 11/20   | 0.45              |
-
-
-Full interactive table: `experiment-2/figures/bias_table.html`
