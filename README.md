@@ -63,7 +63,7 @@ Experiment 1 - Metric breakdown
 
 Experiment 2 - Metric breakdown
 
-- Prompt: `experiment-2/generate_dataset.py` (discovery generation), `experiment-2/run_eval.py` (attribution prompt)
+- Prompts: `experiment-2/artifacts/<model>/generated_prompts.json` (manually curated per model; `.orig.json` is the pre-curation version)
 - Artifacts: `experiment-2/artifacts/`, `experiment-2/eval_results/`
 
 | Model                  | Category             | Correct | Source-Level Bias |
