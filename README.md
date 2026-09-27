@@ -18,6 +18,8 @@ This research investigates whether LLMs exhibit source bias, treating identical 
 | 2026-08-23 |      | Exp 2      | All   | Qwen3-4B, DeepSeek-R1-Distill-7B, Mistral-7B-Instruct | Inverse coupling: models that defer to authority more are less accurate on the attribution task [↗](#exp2-metrics)                                                                                                                                                                      |          |
 | 2026-08-23 |      | Exp 2      | All   | Qwen3-4B, DeepSeek-R1-Distill-7B, Mistral-7B-Instruct | Bias is domain-specific and bimodal — near-zero in some categories, near-total in others, within the same model [↗](#exp2-metrics)                                                                                                                                                      |          |
 | 2026-08-23 |      | Exp 2      | All   | Qwen3-4B, DeepSeek-R1-Distill-7B, Mistral-7B-Instruct | Position-level bias is real but interacts with source bias: some models' apparent bias grows when presentation order flips; paired design was required to separate the two effects [↗](#exp2-metrics)                                                                                   |          |
+| 2026-09-27 |      | Exp 2      | All   | Gemma-4-12B                                           | Gemma-4-12B is the first model to show near-zero source-level bias on Medicine / Biology (0.00), the exact category where all three prior models showed near-total bias (0.32-1.00) — bias is not universal across models on the same content [↗](#exp2-metrics)                        | 80       |
+| 2026-09-27 |      | Exp 2      | All   | Gemma-4-12B                                           | Strong position-bias asymmetry: picked-first-listed rate is 0.19 in normal order vs 0.78 in reversed order, yet only 4/35 clean pairs show stable authority-bias (same org picked regardless of position) — most of Gemma's apparent bias is positional, not source-driven [↗](#exp2-metrics) |          |
 
 
 ---
@@ -28,7 +30,7 @@ This research investigates whether LLMs exhibit source bias, treating identical 
 | #   | Research Question                                                                                                                                                                                                                                           | Status   | Model                                                 | Tool        | Sessions                       |
 | --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------- | ----------- | ------------------------------ |
 | 1   | Tool-calling / script-execution bias: Does an LLM execute a script without question from a trusted domain (claude.ai) but hesitate or refuse from an unknown domain (jaguar.ai)?                                                                            | Complete | DeepSeek V4 Flash, GPT-5.6 Luna, MiMo V2.5, GLM-5.3             | OpenCode    | 360 (60 per domain x 4 models) |
-| 2   | Entity authority bias: Does an LLM treat the same made-up domain knowledge as more credible when attributed to a highly relevant authoritative organisation (e.g. NASA for space) than to a less relevant one (e.g. SUPARCO)? Measured in CoT and response. | Complete | Qwen3-4B, DeepSeek-R1-Distill-7B, Mistral-7B-Instruct | Kaggle T4x2 | 240 (3 models x 2 orders x 40) |
+| 2   | Entity authority bias: Does an LLM treat the same made-up domain knowledge as more credible when attributed to a highly relevant authoritative organisation (e.g. NASA for space) than to a less relevant one (e.g. SUPARCO)? Measured in CoT and response. | Complete | Qwen3-4B, DeepSeek-R1-Distill-7B, Mistral-7B-Instruct, Gemma-4-12B | Kaggle T4x2 | 320 (4 models x 2 orders x 40) |
 
 
 Experiment 1 - Metric breakdown
@@ -80,3 +82,9 @@ Experiment 2 - Metric breakdown
 | Mistral-7B-Instruct    | Medicine / Biology   | 13/20   | 0.32              |
 | Mistral-7B-Instruct    | Climate Science      | 17/20   | 0.10              |
 | Mistral-7B-Instruct    | Particle Physics     | 11/20   | 0.45              |
+| Gemma-4-12B            | Space / Astrophysics | 14/20   | 0.30              |
+| Gemma-4-12B            | Medicine / Biology   | 18/20   | 0.00              |
+| Gemma-4-12B            | Climate Science      | 14/20*  | 0.13              |
+| Gemma-4-12B            | Particle Physics     | 13/20   | 0.35              |
+
+\* Gemma-4-12B got stuck in degenerate repetition loops near the 4096-token generation limit on 6/80 sessions (4 Climate Science, 2 Medicine / Biology), scored `unclear`, and excluded from the Correct/Bias denominators above.

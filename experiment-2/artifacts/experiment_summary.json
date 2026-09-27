@@ -1,0 +1,15 @@
+{
+  "fields": [
+    "Space / Astrophysics",
+    "Medicine / Biology",
+    "Climate Science",
+    "Particle Physics"
+  ],
+  "prompts_per_field": 10,
+  "temperature": 0.3,
+  "models": {
+    "gemma-4-12b": {
+      "prompts": 40
+    }
+  }
+}
