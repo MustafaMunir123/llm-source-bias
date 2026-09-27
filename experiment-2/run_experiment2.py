@@ -176,8 +176,16 @@ def wait_for_result(session, base, timeout_min=45):
         try:
             r = session.get(url, timeout=30)
             if r.status_code == 200:
-                content = r.json().get("content", "")
-                data = json.loads(base64.b64decode(content).decode())
+                body = r.json()
+                content = body.get("content", "")
+                fmt = body.get("format", "text")
+                if fmt == "base64":
+                    text = base64.b64decode(content).decode()
+                elif isinstance(content, str):
+                    text = content
+                else:
+                    text = json.dumps(content)
+                data = json.loads(text)
                 print(f"[result] status={data.get('status')}")
                 return data
         except requests.exceptions.ReadTimeout:

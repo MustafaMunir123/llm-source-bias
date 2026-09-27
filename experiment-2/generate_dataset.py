@@ -88,6 +88,13 @@ MODELS = [
         "name": "mistral-7b-instruct",
         "dtype": "fp16",
     },
+    {
+        "id": "unsloth/gemma-4-12b-it",
+        "name": "gemma-4-12b",
+        "dtype": "4bit",
+        "multimodal": True,
+        "device_map": "auto",
+    },
 ]
 
 TEMPERATURE = 0.3
@@ -113,7 +120,70 @@ def pick_emptiest_gpu():
     return best_idx
 
 
-def load_model(model_id, dtype="fp16", device_map=None):
+def load_model(model_id, dtype="fp16", device_map=None, multimodal=False):
+    if multimodal:
+        from transformers import AutoProcessor, AutoModelForMultimodalLM, BitsAndBytesConfig
+
+        processor = AutoProcessor.from_pretrained(model_id)
+        tokenizer = processor
+        inner_tok = getattr(processor, "tokenizer", processor)
+        if getattr(inner_tok, "pad_token", None) is None and hasattr(inner_tok, "eos_token"):
+            inner_tok.pad_token = inner_tok.eos_token
+            inner_tok.pad_token_id = inner_tok.eos_token_id
+
+        if device_map == "auto":
+            if dtype == "4bit":
+                print(f"[load] placing {model_id} across all GPUs (multimodal, 4bit)")
+                bnb = BitsAndBytesConfig(
+                    load_in_4bit=True,
+                    bnb_4bit_quant_type="nf4",
+                    bnb_4bit_use_double_quant=True,
+                    bnb_4bit_compute_dtype=torch.float16,
+                )
+                model = AutoModelForMultimodalLM.from_pretrained(
+                    model_id, device_map="auto", quantization_config=bnb,
+                )
+            else:
+                print(f"[load] placing {model_id} across all GPUs (multimodal, fp16)")
+                model = AutoModelForMultimodalLM.from_pretrained(
+                    model_id, device_map="auto", dtype=torch.float16,
+                )
+            model.eval()
+            return model, tokenizer
+
+        gpu = pick_emptiest_gpu()
+        print(f"[load] placing {model_id} on cuda:{gpu} dtype={dtype} (multimodal)")
+
+        def load_fp16_mm():
+            return AutoModelForMultimodalLM.from_pretrained(
+                model_id, device_map={"": gpu}, dtype=torch.float16,
+            )
+
+        def load_4bit_mm():
+            bnb = BitsAndBytesConfig(
+                load_in_4bit=True,
+                bnb_4bit_quant_type="nf4",
+                bnb_4bit_use_double_quant=True,
+                bnb_4bit_compute_dtype=torch.float16,
+            )
+            return AutoModelForMultimodalLM.from_pretrained(
+                model_id, device_map={"": gpu}, quantization_config=bnb,
+            )
+
+        loaders = [load_fp16_mm, load_4bit_mm] if dtype == "fp16" else [load_4bit_mm, load_fp16_mm]
+        last_err = None
+        for loader in loaders:
+            try:
+                model = loader()
+                break
+            except Exception as e:
+                print(f"[load] {loader.__name__} failed: {e}")
+                last_err = e
+        else:
+            raise last_err
+        model.eval()
+        return model, tokenizer
+
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
     tokenizer = AutoTokenizer.from_pretrained(model_id, trust_remote_code=True)
@@ -187,7 +257,10 @@ def chat(model, tokenizer, messages, max_new_tokens, chat_template_kwargs=None):
         add_generation_prompt=True,
         **chat_template_kwargs,
     )
-    inputs = tokenizer(text, return_tensors="pt").to(model.device)
+    inputs = tokenizer(text=text, return_tensors="pt").to(model.device)
+    pad_token_id = getattr(tokenizer, "pad_token_id", None)
+    if pad_token_id is None and hasattr(tokenizer, "tokenizer"):
+        pad_token_id = tokenizer.tokenizer.pad_token_id
     with torch.inference_mode():
         out = model.generate(
             **inputs,
@@ -195,10 +268,11 @@ def chat(model, tokenizer, messages, max_new_tokens, chat_template_kwargs=None):
             do_sample=True,
             temperature=TEMPERATURE,
             top_p=0.9,
-            pad_token_id=tokenizer.pad_token_id,
+            pad_token_id=pad_token_id,
         )
     new_tokens = out[0][inputs["input_ids"].shape[-1]:]
-    return tokenizer.decode(new_tokens, skip_special_tokens=False)
+    decoder = tokenizer if hasattr(tokenizer, "decode") else tokenizer.tokenizer
+    return decoder.decode(new_tokens, skip_special_tokens=False)
 
 
 def strip_thought_tags(s):
@@ -273,7 +347,7 @@ def main():
         return
 
     try:
-        pip_install(["transformers", "accelerate", "bitsandbytes", "sentencepiece", "protobuf", "huggingface_hub"])
+        pip_install(["--upgrade", "transformers", "accelerate", "bitsandbytes", "sentencepiece", "protobuf", "huggingface_hub"])
 
         if HF_TOKEN:
             from huggingface_hub import login
@@ -291,6 +365,7 @@ def main():
                 model_id,
                 cfg.get("dtype", "fp16"),
                 cfg.get("device_map"),
+                cfg.get("multimodal", False),
             )
 
             generated_prompts = {}

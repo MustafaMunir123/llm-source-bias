@@ -23,6 +23,7 @@ MODELS = {
     "qwen3-4b": "Qwen/Qwen3-4B",
     "deepseek-r1-distill-qwen-7b": "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
     "mistral-7b-instruct": "mistralai/Mistral-7B-Instruct-v0.3",
+    "gemma-4-12b": "unsloth/gemma-4-12b-it",
 }
 
 KERNEL_TEMPLATE = '''KAGGLE_MODEL_OVERRIDE = "{model_key}"
@@ -56,10 +57,12 @@ MODELS = {{
     "qwen3-4b": "Qwen/Qwen3-4B",
     "deepseek-r1-distill-qwen-7b": "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
     "mistral-7b-instruct": "mistralai/Mistral-7B-Instruct-v0.3",
+    "gemma-4-12b": "unsloth/gemma-4-12b-it",
 }}
 
 # models whose fp16 weights leave no room for KV cache on a T4 -> start 4-bit
-FOURBIT_FIRST = {{"deepseek-r1-distill-qwen-7b"}}
+FOURBIT_FIRST = {{"deepseek-r1-distill-qwen-7b", "gemma-4-12b"}}
+MULTIMODAL = {{"gemma-4-12b"}}
 
 # prompts embedded at build time: {{field: [{{field, index, data}}]}}
 PROMPTS = json.loads(r\"\"\"{prompts_json}\"\"\")
@@ -85,6 +88,28 @@ def pick_emptiest_gpu():
 
 
 def load_model(model_id):
+    if MODEL_KEY in MULTIMODAL:
+        from transformers import AutoProcessor, AutoModelForMultimodalLM, BitsAndBytesConfig
+
+        processor = AutoProcessor.from_pretrained(model_id)
+        inner_tok = getattr(processor, "tokenizer", processor)
+        if getattr(inner_tok, "pad_token", None) is None and hasattr(inner_tok, "eos_token"):
+            inner_tok.pad_token = inner_tok.eos_token
+            inner_tok.pad_token_id = inner_tok.eos_token_id
+
+        print(f"[load] placing {{model_id}} across all GPUs (multimodal, 4bit)")
+        bnb = BitsAndBytesConfig(
+            load_in_4bit=True,
+            bnb_4bit_quant_type="nf4",
+            bnb_4bit_use_double_quant=True,
+            bnb_4bit_compute_dtype=torch.float16,
+        )
+        model = AutoModelForMultimodalLM.from_pretrained(
+            model_id, device_map="auto", quantization_config=bnb,
+        )
+        model.eval()
+        return model, processor
+
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
     tokenizer = AutoTokenizer.from_pretrained(model_id, trust_remote_code=True)
@@ -141,7 +166,10 @@ def chat(model, tokenizer, messages, max_new_tokens, chat_template_kwargs=None):
         add_generation_prompt=True,
         **chat_template_kwargs,
     )
-    inputs = tokenizer(text, return_tensors="pt").to(model.device)
+    inputs = tokenizer(text=text, return_tensors="pt").to(model.device)
+    pad_token_id = getattr(tokenizer, "pad_token_id", None)
+    if pad_token_id is None and hasattr(tokenizer, "tokenizer"):
+        pad_token_id = tokenizer.tokenizer.pad_token_id
     with torch.inference_mode():
         out = model.generate(
             **inputs,
@@ -149,10 +177,11 @@ def chat(model, tokenizer, messages, max_new_tokens, chat_template_kwargs=None):
             do_sample=True,
             temperature=TEMPERATURE,
             top_p=0.9,
-            pad_token_id=tokenizer.pad_token_id,
+            pad_token_id=pad_token_id,
         )
     new_tokens = out[0][inputs["input_ids"].shape[-1]:]
-    return tokenizer.decode(new_tokens, skip_special_tokens=False)
+    decoder = tokenizer if hasattr(tokenizer, "decode") else tokenizer.tokenizer
+    return decoder.decode(new_tokens, skip_special_tokens=False)
 
 
 def split_cot(raw):
@@ -162,6 +191,7 @@ def split_cot(raw):
         ("<|begin_of_thought|>", "<|end_of_thought|>"),
         ("<thinking>", "</thinking>"),
         ("<|startofthink|>", "<|endofthink|>"),
+        ("<|channel>thought", "<channel|>"),
     ]:
         if open_tok in raw and close_tok in raw:
             reasoning = raw.split(open_tok, 1)[1].split(close_tok, 1)[0].strip()
@@ -192,7 +222,7 @@ def main():
     write_json(RESULT_FILE, {{"status": "running", "started_at": time.time()}})
 
     try:
-        pip_install(["transformers", "accelerate", "bitsandbytes", "sentencepiece", "protobuf", "huggingface_hub"])
+        pip_install(["--upgrade", "transformers", "accelerate", "bitsandbytes", "sentencepiece", "protobuf", "huggingface_hub"])
 
         if HF_TOKEN:
             from huggingface_hub import login
