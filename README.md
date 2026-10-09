@@ -88,3 +88,5 @@ Experiment 2 - Metric breakdown
 | Gemma-4-12B            | Particle Physics     | 13/20   | 0.35              |
 
 \* Gemma-4-12B got stuck in degenerate repetition loops near the 4096-token generation limit on 6/80 sessions (4 Climate Science, 2 Medicine / Biology), scored `unclear`, and excluded from the Correct/Bias denominators above.
+
+Figures (all four models, including Gemma-4-12B): `experiment-2/figures/source_level_bias.png`, `experiment-2/figures/position_level_bias.png`. These are separate from `paper/figures/`, which stays scoped to the three models in the submitted paper.
