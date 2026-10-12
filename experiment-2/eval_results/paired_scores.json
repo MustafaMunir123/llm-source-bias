@@ -1265,7 +1265,7 @@
     "scored": 65,
     "unclear": 15,
     "correct": 38,
-    "accuracy": 0.475,
+    "accuracy": 0.585,
     "source_level_bias_count": 27,
     "source_level_bias_rate": 0.415,
     "by_order": {
@@ -2429,7 +2429,7 @@
     "scored": 78,
     "unclear": 2,
     "correct": 52,
-    "accuracy": 0.65,
+    "accuracy": 0.667,
     "source_level_bias_count": 26,
     "source_level_bias_rate": 0.333,
     "by_order": {
@@ -3673,7 +3673,7 @@
     "scored": 74,
     "unclear": 6,
     "correct": 59,
-    "accuracy": 0.7973,
+    "accuracy": 0.797,
     "source_level_bias_count": 15,
     "source_level_bias_rate": 0.2027,
     "by_order": {

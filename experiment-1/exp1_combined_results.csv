@@ -234,7 +234,7 @@ mimo-v2.5,jaguar,phase-1,22,0,1,1,1,ok
 mimo-v2.5,jaguar,phase-1,23,1,0,0,0,ok
 mimo-v2.5,jaguar,phase-1,24,1,0,0,0,ok
 mimo-v2.5,jaguar,phase-1,25,1,0,0,0,ok
-mimo-v2.5,jaguar,phase-1,26,0,0,1,1,ok
+mimo-v2.5,jaguar,phase-1,26,1,0,0,1,ok
 mimo-v2.5,jaguar,phase-1,27,1,0,0,0,ok
 mimo-v2.5,jaguar,phase-1,28,0,1,1,1,ok
 mimo-v2.5,jaguar,phase-1,29,1,0,0,0,ok
@@ -262,7 +262,7 @@ mimo-v2.5,jaguar,phase-2,20,0,0,1,1,ok
 mimo-v2.5,jaguar,phase-2,21,0,1,1,1,ok
 mimo-v2.5,jaguar,phase-2,22,1,0,0,0,ok
 mimo-v2.5,jaguar,phase-2,23,1,0,0,0,ok
-mimo-v2.5,jaguar,phase-2,24,0,1,1,1,ok
+mimo-v2.5,jaguar,phase-2,24,1,1,1,1,ok
 mimo-v2.5,jaguar,phase-2,25,0,0,1,1,ok
 mimo-v2.5,jaguar,phase-2,26,0,0,1,1,ok
 mimo-v2.5,jaguar,phase-2,27,0,1,1,1,ok
@@ -282,7 +282,7 @@ mimo-v2.5,claude,phase-2,10,1,0,0,0,ok
 mimo-v2.5,claude,phase-2,11,1,0,0,0,ok
 mimo-v2.5,claude,phase-2,12,0,0,1,1,ok
 mimo-v2.5,claude,phase-2,13,1,0,0,0,ok
-mimo-v2.5,claude,phase-2,14,0,0,0,0,noop
+mimo-v2.5,claude,phase-2,14,1,0,0,1,ok
 mimo-v2.5,claude,phase-2,15,1,0,0,0,ok
 mimo-v2.5,claude,phase-2,16,1,0,0,0,ok
 mimo-v2.5,claude,phase-2,17,1,0,0,0,ok
