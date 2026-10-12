@@ -22,9 +22,9 @@ def main():
             if nf and rf:
                 a += 1
             elif nf and not rf:
-                b += 1
+                c += 1  # authority (normal) -> marginal (reversed): flipped away from authority
             elif not nf and rf:
-                c += 1
+                b += 1  # marginal (normal) -> authority (reversed): flipped toward authority
             else:
                 e += 1
         p = exact_mcnemar(b, c)

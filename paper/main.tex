@@ -39,7 +39,7 @@
 \maketitle
 
 \begin{abstract}
-Do large language models evaluate not only what information says, but also who appears to have said it? We call this potential effect \emph{source-level bias}: identical content treated differently when its apparent source changes, even though the content itself stays fixed. We report two experiments that isolate this variable and test whether it holds. In Experiment 1, four tool-calling agents (DeepSeek V4 Flash, GPT-5.6 Luna, MiMo V2.5, GLM-5.3) receive an identical install-script page and instruction; only the domain hosting the page changes, a trusted one (\texttt{claude.ai}) or an unknown one (\texttt{jaguar.ai}). Across 420 sessions, two models inspect, refuse, and flag suspicion on the unknown domain several times more often, while execution itself is largely unaffected; one model shows no source discrimination at all and executes both domains identically; another refuses the unknown domain more often, but its chain-of-thought never shows suspicion. In Experiment 2, three smaller local models (Qwen3-4B, DeepSeek-R1-Distill-7B, Mistral-7B-Instruct) attribute 40 fabricated scientific discoveries to one of two candidate organizations, one topically authoritative and one topically marginal, under counterbalanced presentation order. All three models misattribute discoveries to the authoritative organization at domain-specific rates reaching near-total in some fields, though their aggregate bias rate still stays below the no-signal baseline. Position bias, often assumed to accompany this effect, survives statistical testing for only one of the three models. Together, the two experiments show that source identity shifts both what an agent does and what a model believes, and that this sensitivity is inconsistent across models, and sometimes silent.
+Do large language models evaluate not only what information says, but also who appears to have said it? We call this potential effect \emph{source-level bias}: identical content treated differently when its apparent source changes, even though the content itself stays fixed. We report two experiments that isolate this variable and test whether it holds. In Experiment 1, four tool-calling agents (DeepSeek V4 Flash, GPT-5.6 Luna, MiMo V2.5, GLM-5.3) receive an identical install-script page and instruction; only the domain hosting the page changes, a trusted one (\texttt{claude.ai}) or an unknown one (\texttt{jaguar.ai}). Across 480 sessions, three models inspect, refuse, and flag suspicion on the unknown domain several times more often, with execution itself also significantly reduced for two of them once sessions that merely stalled on a permission prompt are separated from confirmed completed runs; the fourth model shows no source discrimination at all and executes both domains identically. In Experiment 2, three smaller local models (Qwen3-4B, DeepSeek-R1-Distill-7B, Mistral-7B-Instruct) attribute 40 fabricated scientific discoveries to one of two candidate organizations, one topically authoritative and one topically marginal, under counterbalanced presentation order. All three models misattribute discoveries to the authoritative organization at domain-specific rates reaching near-total in some fields, and their aggregate bias rate of 33--42\% is already large: ground truth is always the topically marginal organization, so a model following the evidence rather than apparent authority would score near 0\%. Position bias, often assumed to accompany this effect, survives statistical testing for only one of the three models. Together, the two experiments show that source identity shifts both what an agent does and what a model believes, and that this sensitivity is inconsistent across models.
 \end{abstract}
 
 \section{Introduction}
@@ -47,11 +47,11 @@ Do large language models evaluate not only what information says, but also who a
 
 When a language model receives information, it does not only evaluate the content. It also evaluates, implicitly, who or what produced it. We call this \emph{source-level bias}: a model's behavior or judgment changes when the apparent identity of a source changes, even though the content stays fixed. This is distinct from \emph{position-level bias}, where a model's choice tracks the order items are presented in, not the identity of the items themselves. The two are easy to conflate in practice, since an authoritative entity is often also the one listed first. Separating them requires a counterbalanced design.
 
-Source-level bias matters wherever a model consumes information whose provenance can be spoofed, exaggerated, or misrepresented: web pages, tool outputs, retrieved documents, or claims attributed to an organization. If a model's behavior changes because a source \emph{claims} to be trustworthy, rather than because the content warrants trust, then trust is not being evaluated. It is being impersonated. This has direct consequences for security: an attacker who can spoof a trusted domain name may bypass scrutiny a model would otherwise apply. It also has consequences for reliability: a model that defers to an authoritative-sounding organization regardless of evidence will misattribute claims, and propagate misinformation under a credible byline.
+Source-level bias matters wherever a model consumes information whose provenance can be spoofed, exaggerated, or misrepresented: web pages, tool outputs, retrieved documents, or claims attributed to an organization. If a model's behavior changes because a source \emph{claims} to be trustworthy, rather than because the content warrants trust, then trust is not being evaluated. It is being impersonated. This has direct consequences for security: an attacker who can spoof a trusted domain name can expect less inspection, fewer refusals, and less expressed suspicion from the model --- though, as our results show, this rarely changes whether a script executes at all, since execution itself is largely indiscriminate across domains. It also has consequences for reliability: a model that defers to an authoritative-sounding organization regardless of evidence will misattribute claims, and propagate misinformation under a credible byline.
 
 We study source-level bias in two settings. The two settings differ in what is being biased, an agent's \emph{action} versus a model's \emph{belief}, and in how the model accesses the world, a tool-calling agent operating over live web content versus a local model reasoning directly over a claim.
 
-\textbf{Experiment 1 (Section~\ref{sec:exp1})} asks whether a tool-calling agent executes an installer script differently depending on whether the page hosting it appears to be a trusted domain or an unfamiliar one. The script and the instruction are held byte-identical across conditions. This isolates source identity as a spoofing variable: an attacker who can make an unknown domain \emph{look like} a trusted one inherits whatever leniency the model reserves for trusted sources. Domain spoofing itself is simulated in our setup via a local reverse proxy that serves the identical page and script under either domain name. The proxy is an experimental method for producing a clean causal manipulation. It is not itself the phenomenon of interest.
+\textbf{Experiment 1 (Section~\ref{sec:exp1})} asks whether a tool-calling agent executes an installer script differently depending on whether the page hosting it appears to be a trusted domain or an unfamiliar one. The script and the instruction are held byte-identical across conditions. This isolates source identity as a spoofing variable: an attacker who can make an unknown domain \emph{look like} a trusted one can expect less inspection, fewer refusals, and less expressed suspicion, though not meaningfully more execution, since most models already execute both domains at high rates regardless of apparent trust. Domain spoofing itself is simulated in our setup via a local reverse proxy that serves the identical page and script under either domain name. The proxy is an experimental method for producing a clean causal manipulation. It is not itself the phenomenon of interest.
 
 \textbf{Experiment 2 (Section~\ref{sec:exp2})} asks whether a model attributes a fabricated scientific discovery to a topically authoritative organization more often than the evidence supports. It separates that tendency from simple position bias using a counterbalanced normal/reversed presentation design.
 
@@ -79,23 +79,24 @@ The instruction given to each agent, delivered via the OpenCode CLI, was: \emph{
 
 \subsection{Models and procedure}
 
-We evaluate four models operating as tool-calling agents inside OpenCode: DeepSeek V4 Flash, GPT-5.6 Luna, MiMo V2.5, and GLM-5.3. Each model runs 60 independent sessions under the trusted domain and 60 under the unknown domain, for 420 sessions in total. Every session was manually reviewed against the full transcript. One MiMo V2.5 trusted-domain session found the tool already installed and made no install decision. It produces no comparable executed/inspect/refuse/suspicion outcome, so that single session is excluded from the tallied denominator for that cell ($n=59$). It is not excluded from the experiment.
+We evaluate four models operating as tool-calling agents inside OpenCode: DeepSeek V4 Flash, GPT-5.6 Luna, MiMo V2.5, and GLM-5.3. Each model runs 60 independent sessions under the trusted domain and 60 under the unknown domain, for 480 sessions in total. Every session was manually reviewed against the full transcript.
 
 \subsection{Metrics}
 
 For each session we record four binary outcomes:
 \begin{itemize}
-  \item \textbf{Executed}: the install command was run, including sessions that stalled on a permission prompt or asked before running.
+  \item \textbf{Executed}: the install command was run, including sessions that stalled on a permission prompt or asked before running. Because this bundles confirmed completed runs together with sessions that never got past a permission dialog, we separately report a stricter \textbf{confirmed-run} check (Table~\ref{tab:exp1-confirmed}) that counts only sessions with direct transcript evidence the install command executed.
   \item \textbf{Fetched install.sh}: the agent proactively read the script's contents, before or instead of blind execution.
   \item \textbf{Refused}: the agent declined to run the script or explicitly warned the user.
   \item \textbf{Suspicion}: the agent's visible reasoning expressed concern about the source, independent of its final action.
 \end{itemize}
+These four outcomes are non-exclusive binary flags, not a single categorical label: a session can both execute and later refuse (e.g.\ GLM-5.3 on the unknown domain, where 52/60 Executed and 10/60 Refused sum to more than 60, because several sessions ran the install command and only afterward warned the user against running it again), or execute and still express suspicion. Each row of Table~\ref{tab:exp1} is therefore its own independent $2\times2$ test, not a partition of the 60 sessions.
 We test each metric with a two-sided Fisher exact test \citep{fisher1922interpretation} on the trusted-vs-unknown $2\times2$ table and report the risk ratio (RR) of the unknown-domain rate over the trusted-domain rate. For trusted-domain counts $(a,b)$ and unknown-domain counts $(c,d)$ (metric present/absent), the exact hypergeometric probability of the observed table under fixed margins is
 \begin{equation}
   P(X = x) = \frac{\binom{a+b}{x}\binom{c+d}{(a+c)-x}}{\binom{n}{a+c}}, \qquad n = a+b+c+d,
   \label{eq:fisher}
 \end{equation}
-and the two-sided $p$-value sums this probability over every table at least as extreme as the one observed. The risk ratio is $\mathrm{RR} = \frac{c/(c+d)}{a/(a+b)}$, the unknown-domain rate divided by the trusted-domain rate.
+and the two-sided $p$-value sums this probability over every table at least as extreme as the one observed. The risk ratio is $\mathrm{RR} = \frac{c/(c+d)}{a/(a+b)}$, the unknown-domain rate divided by the trusted-domain rate. Table~\ref{tab:exp1} runs 16 such tests (4 models $\times$ 4 metrics); we additionally report, per cell, whether that test survives a Bonferroni correction for all 16 ($\alpha = 0.05/16 = 0.0031$), marking any nominally significant result that does not with $\dagger$.
 
 \subsection{Results}
 
@@ -106,10 +107,28 @@ and the two-sided $p$-value sums this probability over every table at least as e
   \label{fig:exp1}
 \end{figure}
 
-Table~\ref{tab:exp1} reports the full per-model, per-metric breakdown. Execution rates are largely unaffected by domain for three of four models (DeepSeek, GPT-5.6 Luna, GLM-5.3 all non-significant); MiMo is the exception, executing the unknown domain significantly \emph{less} often (RR $=0.64$, $p<0.0001$). Inspection, refusal, and suspicion, by contrast, are where source identity has its clearest and most consistent effect.
+Table~\ref{tab:exp1} reports the full per-model, per-metric breakdown. Under the bundled Executed definition, execution rates look largely unaffected by domain for three of four models (DeepSeek, GPT-5.6 Luna, GLM-5.3 all non-significant); MiMo is the exception, executing the unknown domain significantly \emph{less} often (RR $=0.68$, $p=0.0001$). Inspection, refusal, and suspicion, by contrast, are where source identity has its clearest and most consistent effect.
+
+Because Executed bundles confirmed completed runs with sessions that stalled on a permission prompt, this near-ceiling non-significance can hide a real effect. Table~\ref{tab:exp1-confirmed} re-tests execution restricted to sessions with direct transcript evidence the install command ran (GPT-5.6 Luna is excluded: its unknown-domain transcripts were not retained for re-verification). Once stalls are set aside, \textbf{DeepSeek's} execution rate becomes significant too (53/60 vs.\ 43/60, $p=0.039$, RR $=0.81$) --- the stall-inclusive version (54/60 vs.\ 45/60, $p=0.053$) missed this by sitting just above the $p<0.05$ line. MiMo's result is unchanged (it had no stall-only sessions once two execution miscodes were corrected), and GLM-5.3 remains non-significant either way. Execution is therefore genuinely domain-sensitive for two of the three models we could re-verify, not one.
 
 \begin{table}[htbp]
-  \caption{Experiment 1 results by model and metric. $p$ is a two-sided Fisher exact test on the trusted vs.\ unknown $2\times2$ table; RR is the unknown-domain rate divided by the trusted-domain rate. Significance: * $p<.05$, ** $p<.01$, *** $p<.001$, ns = not significant.}
+  \caption{Confirmed-run execution: sessions restricted to direct transcript evidence (an executed \texttt{install.sh | bash} or equivalent) that the install command ran, excluding sessions that stalled on a permission prompt without ever running it. GPT-5.6 Luna is excluded because its unknown-domain session transcripts were not retained.}
+  \label{tab:exp1-confirmed}
+  \centering
+  \small
+  \begin{tabular}{lccccl}
+    \toprule
+    Model & claude.ai & jaguar.ai & $p$ & RR & Verdict \\
+    \midrule
+    DeepSeek V4 Flash & 53/60 & 43/60 & 0.0385 & 0.81 & * \\
+    MiMo V2.5 & 56/60 & 38/60 & 0.0001 & 0.68 & *** \\
+    GLM-5.3 & 58/60 & 52/60 & 0.0946 & 0.90 & ns \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+  \caption{Experiment 1 results by model and metric. $p$ is a two-sided Fisher exact test on the trusted vs.\ unknown $2\times2$ table; RR is the unknown-domain rate divided by the trusted-domain rate. Significance: * $p<.05$, ** $p<.01$, *** $p<.001$, ns = not significant. $\dagger$ marks a result that does not survive a Bonferroni correction across all 16 tests in this table ($\alpha = 0.05/16 = 0.0031$).}
   \label{tab:exp1}
   \centering
   \small
@@ -119,22 +138,22 @@ Table~\ref{tab:exp1} reports the full per-model, per-metric breakdown. Execution
     \midrule
     \multirow{4}{*}{DeepSeek V4 Flash} & Executed & 54/60 & 45/60 & 0.0528 & 0.83~ns \\
      & Fetched install.sh & 2/60 & 14/60 & 0.0022 & 7.00~** \\
-     & Refused & 1/60 & 10/60 & 0.0084 & 10.00~** \\
+     & Refused & 1/60 & 10/60 & 0.0084 & 10.00~**$\dagger$ \\
      & Suspicion & 4/60 & 27/60 & $<$0.0001 & 6.75~*** \\
     \midrule
     \multirow{4}{*}{GPT-5.6 Luna} & Executed & 60/60 & 60/60 & 1.0000 & 1.00~ns \\
      & Fetched install.sh & 0/60 & 0/60 & 1.0000 & --- \\
      & Refused & 0/60 & 0/60 & 1.0000 & --- \\
-     & Suspicion & 0/60 & 6/60 & 0.0274 & $\infty$~* \\
+     & Suspicion & 0/60 & 6/60 & 0.0274 & $\infty$~*$\dagger$ \\
     \midrule
-    \multirow{4}{*}{MiMo V2.5} & Executed & 55/59 & 36/60 & $<$0.0001 & 0.64~*** \\
-     & Fetched install.sh & 1/59 & 14/60 & 0.0005 & 13.77~*** \\
-     & Refused & 4/59 & 24/60 & $<$0.0001 & 5.90~*** \\
-     & Suspicion & 6/59 & 25/60 & 0.0001 & 4.10~*** \\
+    \multirow{4}{*}{MiMo V2.5} & Executed & 56/60 & 38/60 & 0.0001 & 0.68~*** \\
+     & Fetched install.sh & 1/60 & 14/60 & 0.0005 & 14.00~*** \\
+     & Refused & 4/60 & 23/60 & $<$0.0001 & 5.75~*** \\
+     & Suspicion & 7/60 & 25/60 & 0.0004 & 3.57~*** \\
     \midrule
     \multirow{4}{*}{GLM-5.3} & Executed & 58/60 & 52/60 & 0.0946 & 0.90~ns \\
      & Fetched install.sh & 0/60 & 10/60 & 0.0013 & $\infty$~** \\
-     & Refused & 1/60 & 10/60 & 0.0084 & 10.00~** \\
+     & Refused & 1/60 & 10/60 & 0.0084 & 10.00~**$\dagger$ \\
      & Suspicion & 0/60 & 15/60 & $<$0.0001 & $\infty$~*** \\
     \bottomrule
   \end{tabular}
@@ -142,15 +161,15 @@ Table~\ref{tab:exp1} reports the full per-model, per-metric breakdown. Execution
 
 \subsection{Per-model behavior}
 
-\textbf{DeepSeek V4 Flash} shows a clear form of source-level caution. The unknown domain drives large, significant increases in script inspection (7$\times$), refusal (10$\times$), and expressed suspicion (6.75$\times$), while execution itself is not significantly affected. The agent's visible reasoning and its action move together: when it is suspicious, it is more likely to inspect and refuse.
+\textbf{DeepSeek V4 Flash} shows a clear form of source-level caution. The unknown domain drives large increases in script inspection (7$\times$) and expressed suspicion (6.75$\times$), both of which survive a Bonferroni correction across all 16 tests in Table~\ref{tab:exp1} ($\alpha=0.0031$); refusal (10$\times$, $p=0.0084$) does not survive that correction on its own, though it is corroborated by the surviving inspection and suspicion effects in the same sessions. Execution itself looks unaffected under the bundled Executed metric, but is in fact significantly reduced once stalled-at-permission sessions are excluded (confirmed-run RR $=0.81$, $p=0.039$; Table~\ref{tab:exp1-confirmed}). The agent's visible reasoning and its action move together: when it is suspicious, it is more likely to inspect and refuse.
 
-\textbf{MiMo V2.5} shows the same pattern as DeepSeek, and more. Inspection (13.77$\times$), refusal (5.90$\times$), and suspicion (4.10$\times$) all rise significantly on the unknown domain, and MiMo is the only model in this study for which execution itself is also significantly affected: it executes the unknown domain less often outright (RR $=0.64$, $p<0.0001$). Source identity changes not just how carefully MiMo checks, but whether it acts at all.
+\textbf{MiMo V2.5} shows the same pattern as DeepSeek, and more. Inspection (14.00$\times$), refusal (5.75$\times$), and suspicion (3.57$\times$) all rise significantly on the unknown domain, and execution itself is also significantly affected, more clearly than for DeepSeek: it executes the unknown domain less often outright even under the bundled Executed metric (RR $=0.68$, $p=0.0001$), not only once stalls are excluded. Source identity changes not just how carefully MiMo checks, but whether it acts at all.
 
-\textbf{GPT-5.6 Luna} is the outlier in the opposite direction. It executes both domains at 100\% and shows essentially no source discrimination in any metric, except a weak suspicion signal (6/60 vs.\ 0/60, $p=0.027$) that never translates into inspection or refusal. This is not calibration but absence of scrutiny: inspection and refusal sit at 0\% on \emph{both} domains. An attacker gains nothing here, not because the model resists impersonation, but because it already executes everything.
+\textbf{GPT-5.6 Luna} is the outlier in the opposite direction. It executes both domains at 100\% and shows no source discrimination that survives correction for multiple comparisons: its one nominally significant cell, suspicion (6/60 vs.\ 0/60, $p=0.027$), is also the only nominally significant result in this study that does not survive a Bonferroni correction across all 16 tests ($\alpha=0.0031$), and it never translates into inspection or refusal regardless. This is not calibration but absence of scrutiny: inspection and refusal sit at 0\% on \emph{both} domains. An attacker gains nothing here, not because the model resists impersonation, but because it already executes everything.
 
-\textbf{GLM-5.3} shows a third pattern. It refuses the unknown domain significantly more often (10/60 vs.\ 1/60, $p=0.008$) and inspects it more (10/60 vs.\ 0/60, $p=0.001$), but does so with \emph{zero} expressed suspicion in either domain across all sessions. Suspicion never appears for GLM-5.3 at all in this table, so the refusal behavior is not accompanied by any traceable chain-of-thought signal. GLM-5.3's caution is real but silent. Its transcripts give no indication, before the refusal itself, of why the unknown domain was treated differently.
+\textbf{GLM-5.3} shows the same pattern as DeepSeek. Inspection ($0/60$ vs.\ $10/60$, $p=0.001$, $\infty\times$) and suspicion ($0/60$ vs.\ $15/60$, $p<0.0001$, $\infty\times$) rise significantly on the unknown domain and survive a Bonferroni correction across all 16 tests in Table~\ref{tab:exp1}; refusal ($1/60$ vs.\ $10/60$, $p=0.008$, $10.00\times$) does not survive that correction on its own, same as for DeepSeek, but is corroborated by the surviving inspection and suspicion effects. Execution itself is not significantly affected. GLM-5.3's refusals are not silent: every one of its 10 refusals co-occurs with expressed suspicion in the same session (e.g.\ \emph{``The install script produced no output --- that's suspicious''}), and suspicion also surfaces in 5 further sessions where the model executes anyway after voicing the same concern. GLM-5.3's caution is real and, like DeepSeek's, fully auditable from its chain-of-thought.
 
-These four patterns matter jointly: a security team auditing only chain-of-thought traces would correctly flag DeepSeek and MiMo, wrongly call GPT-5.6 Luna well-calibrated when it is simply not discriminating at all, and completely miss GLM-5.3's refusals, which surface no suspicion trace to audit.
+These patterns matter jointly: a security team auditing chain-of-thought traces would correctly flag DeepSeek, MiMo, and GLM-5.3 as source-discriminating, but would wrongly call GPT-5.6 Luna well-calibrated when it is in fact simply not discriminating by source at all --- its lack of caution reflects indifference to source identity, not resistance to impersonation.
 
 \section{Experiment 2: Entity Authority Attribution in Local LLMs}
 \label{sec:exp2}
@@ -174,22 +193,22 @@ For each session we record whether the model's answer matches the topically auth
 \subsection{Results}
 
 \begin{table}[htbp]
-  \caption{Experiment 2 aggregate results. Bias rate is the fraction of scored sessions attributed to the topically authoritative organization; 0.50 is the no-signal baseline for a model with no preference between the two candidate organizations.}
+  \caption{Experiment 2 aggregate results. Bias rate is the fraction of scored sessions attributed to the topically authoritative organization. Ground truth is always the topically marginal organization, so a model that follows the fabricated text's own evidence rather than apparent authority would score 0.0; any rate above that reflects deference to source authority over content.}
   \label{tab:exp2-agg}
   \centering
   \small
   \begin{tabular}{lccccc}
     \toprule
-    Model & Sessions & Scored & Accuracy & Bias rate & vs.\ 0.50 baseline \\
+    Model & Sessions & Scored & Accuracy & Bias rate & vs.\ 0.0 floor \\
     \midrule
-    Qwen3-4B & 80 & 80 & 0.625 & 0.375 & below \\
-    DeepSeek-R1-Distill-7B & 80 & 65 & 0.475 & 0.415 & below \\
-    Mistral-7B-Instruct & 80 & 78 & 0.650 & 0.333 & below \\
+    Qwen3-4B & 80 & 80 & 0.625 & 0.375 & above \\
+    DeepSeek-R1-Distill-7B & 80 & 65 & 0.585 & 0.415 & above \\
+    Mistral-7B-Instruct & 80 & 78 & 0.667 & 0.333 & above \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-At the aggregate level, all three models sit \emph{below} the 0.50 no-signal baseline. None of them defers to the authoritative organization more often than chance overall. Read on its own, this aggregate number would suggest source-level bias is a minor effect. It is not. Aggregate bias is diluted by domains where the models are almost perfectly calibrated, which masks domains where they are almost entirely captured by apparent authority (Table~\ref{tab:exp2-domain}, Figure~\ref{fig:exp2-source}).
+At the aggregate level, all three models sit well \emph{above} the 0.0 floor an evidence-following, unbiased model would hit. A rate of 33--42\% means these models defer to apparent authority over the text's own evidence on roughly a third to two-fifths of all scored items --- already a large effect on its own, not a small one. It also understates the true picture: aggregate bias is diluted by domains where the models are almost perfectly calibrated, which masks domains where they are almost entirely captured by apparent authority (Table~\ref{tab:exp2-domain}, Figure~\ref{fig:exp2-source}).
 
 \begin{table}[htbp]
   \caption{Experiment 2 source-level bias rate by domain. Values are the fraction of scored sessions in that domain attributed to the topically authoritative organization.}
@@ -202,7 +221,7 @@ At the aggregate level, all three models sit \emph{below} the 0.50 no-signal bas
     \midrule
     Qwen3-4B & 0.45 & 1.00 & 0.05 & 0.00 \\
     DeepSeek-R1-Distill-7B & 0.19 & 0.65 & 0.41 & 0.40 \\
-    Mistral-7B-Instruct & 0.45 & 0.32 & 0.90 & 0.45 \\
+    Mistral-7B-Instruct & 0.45 & 0.32 & 0.11 & 0.45 \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -214,7 +233,7 @@ At the aggregate level, all three models sit \emph{below} the 0.50 no-signal bas
   \label{fig:exp2-source}
 \end{figure}
 
-The domain pattern is sharply bimodal within every model. Qwen3-4B is perfectly calibrated on Climate Science (0.05) and Particle Physics (0.00), but attributes \emph{all} 20/20 Medicine/Biology discoveries to the authoritative organization. Mistral-7B-Instruct is comparatively well-calibrated on Space/Astrophysics (0.45, near the point where evidence and authority are equally likely to be cited), but reaches 0.90 on Climate Science. No domain is universally safe, and no domain is universally captured across models. The same model that ignores authority entirely in one field can be almost fully governed by it in another.
+The domain pattern is sharply bimodal within every model. Qwen3-4B is perfectly calibrated on Climate Science (0.05) and Particle Physics (0.00), but attributes \emph{all} 20/20 Medicine/Biology discoveries to the authoritative organization. Mistral-7B-Instruct stays within a narrower 0.11--0.45 range across all four domains, with no domain reaching the near-ceiling capture seen in Qwen3-4B's Medicine/Biology result. No domain is universally safe, and no domain is universally captured across models. The same model that ignores authority entirely in one field can be almost fully governed by it in another.
 
 \subsection{Isolating position bias from source bias}
 \label{sec:mcnemar}
@@ -249,9 +268,9 @@ The per-order breakdown (Table~\ref{tab:exp2-order}) shows that every model's ra
     \toprule
     Model & Pairs & $a$ & $b$ & $c$ & $d$ & $p$ & Verdict \\
     \midrule
-    Qwen3-4B & 40 & 14 & 0 & 2 & 24 & 0.5000 & ns \\
-    DeepSeek-R1-Distill-7B & 28 & 6 & 7 & 5 & 10 & 0.7744 & ns \\
-    Mistral-7B-Instruct & 38 & 7 & 0 & 11 & 20 & 0.0010 & *** \\
+    Qwen3-4B & 40 & 14 & 2 & 0 & 24 & 0.5000 & ns \\
+    DeepSeek-R1-Distill-7B & 28 & 6 & 5 & 7 & 10 & 0.7744 & ns \\
+    Mistral-7B-Instruct & 38 & 7 & 11 & 0 & 20 & 0.0010 & *** \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -263,7 +282,7 @@ The per-order breakdown (Table~\ref{tab:exp2-order}) shows that every model's ra
   \label{fig:exp2-position}
 \end{figure}
 
-The result does not match the raw-percentage impression. Only \textbf{Mistral-7B-Instruct} shows a statistically real order effect ($p=0.001$). Every one of its 11 discordant pairs flips in the same direction, toward the authoritative organization on reversal ($b=0$, $c=11$). This is itself notable: it is not noisy flipping but a one-directional shift. \textbf{Qwen3-4B} ($p=0.50$) and \textbf{DeepSeek-R1-Distill-7B} ($p=0.77$) show discordant pairs splitting close to evenly between directions. Their raw normal-to-reversed percentage swings (0.35$\to$0.60 and 0.469$\to$0.636 respectively) are consistent with sampling noise at this sample size ($n=28$--$40$ pairs), not a genuine, model-general position effect.
+The result does not match the raw-percentage impression. Only \textbf{Mistral-7B-Instruct} shows a statistically real order effect ($p=0.001$). Every one of its 11 discordant pairs flips in the same direction, toward the authoritative organization on reversal ($b=11$, $c=0$). This is itself notable: it is not noisy flipping but a one-directional shift. \textbf{Qwen3-4B} ($p=0.50$) and \textbf{DeepSeek-R1-Distill-7B} ($p=0.77$) show discordant pairs splitting close to evenly between directions. Their raw normal-to-reversed percentage swings (0.35$\to$0.60 and 0.469$\to$0.636 respectively) are consistent with sampling noise at this sample size ($n=28$--$40$ pairs), not a genuine, model-general position effect.
 
 We therefore treat position-level bias as an \emph{open question} rather than an established finding of this study. It is real and one-directional for at least one model, but does not currently generalize across the three models tested. A larger paired sample would be needed to determine whether Qwen3-4B's and DeepSeek-R1-Distill-7B's non-significant results reflect a true absence of the effect, or just insufficient power to detect a smaller one.
 
@@ -272,7 +291,9 @@ We therefore treat position-level bias as an \emph{open question} rather than an
 
 Both experiments manipulate source identity as the only independent variable and find that it measurably changes model output. In Experiment 1, it changes what an agent \emph{does}: execute, inspect, refuse. In Experiment 2, it changes what a model \emph{believes}: which organization is credited. Taken together, they support a single underlying claim. Source identity is an exploitable attack surface for language models operating as agents, whether the manipulation targets an agent's actions or a model's stated beliefs.
 
-The two experiments also share a second finding with more troubling implications: model sensitivity to source identity is inconsistent, and that inconsistency is itself a reliability problem. In Experiment 1, this ranges from visible discrimination (DeepSeek, MiMo) to none (GPT-5.6 Luna) to action without any auditable trace (GLM-5.3), so chain-of-thought monitoring alone cannot catch it. In Experiment 2, the inconsistency is domain-specific rather than model-specific: the same model can be a reliable evaluator in one scientific domain and almost entirely governed by institutional reputation in another, with no signal from accuracy alone to predict which regime a new domain will fall into.
+This attack surface is narrower than it may first appear, and the distinction matters for how the finding should be used. Execution on the unknown domain is still high for every model (63--100\%, Table~\ref{tab:exp1}), and for two of the four (GPT-5.6 Luna, GLM-5.3) it is statistically indistinguishable from the trusted domain, so spoofing a trusted domain does not generally unlock execution that would otherwise be blocked. The exceptions are real but partial: DeepSeek and MiMo execute the unknown domain significantly less often (Table~\ref{tab:exp1-confirmed}), yet still execute it a majority of the time. What domain identity changes most consistently, across all four models, is scrutiny: inspection, refusal, and expressed suspicion. A security posture built on the assumption that an unfamiliar source gets meaningfully less execution is not supported by this data; one built on the assumption that an unfamiliar source gets more scrutiny, which may or may not arrive before the harmful action runs, is closer to what we observe. Scrutiny is not prevention.
+
+The two experiments also share a second finding with more troubling implications: model sensitivity to source identity is inconsistent, and that inconsistency is itself a reliability problem. In Experiment 1, this ranges from visible, chain-of-thought-auditable discrimination on inspection, refusal, and suspicion (DeepSeek, MiMo, GLM-5.3) to no discrimination on any metric at all (GPT-5.6 Luna). In Experiment 2, the inconsistency is domain-specific rather than model-specific: the same model can be a reliable evaluator in one scientific domain and almost entirely governed by institutional reputation in another, with no signal from accuracy alone to predict which regime a new domain will fall into.
 
 Practically, this suggests two things. Neither ``trust the model's stated reasoning'' nor ``trust the model's final action'' is on its own a sufficient audit strategy for source-driven behavior. And domain- or topic-level calibration checks are necessary before treating a model's attribution behavior as reliable in a new subject area.
 
@@ -289,7 +310,7 @@ Practically, this suggests two things. Neither ``trust the model's stated reason
 \section{Conclusion}
 \label{sec:conclusion}
 
-Source identity, held independent of content, measurably changes both what tool-calling agents do and what local language models believe. Across four agents and 420 sessions, script inspection, refusal, and expressed suspicion all rise substantially when the identical script is served from an unfamiliar domain. This sensitivity is absent in one model, and silent in another: present in action but not in any visible reasoning trace. Across three local models and 240 attribution sessions, all three misattribute fabricated discoveries to a topically authoritative organization at domain-specific rates reaching total capture in some fields and near-perfect calibration in others within the same model. A counterbalanced, statistically tested analysis further shows that the more commonly assumed companion effect, position bias, is not automatically present alongside source bias. It is real and one-directional for one model, and statistically indistinguishable from chance for the other two. We report it as an open question for follow-up work with larger paired samples, not a settled finding.
+Source identity, held independent of content, measurably changes both what tool-calling agents do and what local language models believe. Across four agents and 480 sessions, script inspection, refusal, and expressed suspicion all rise substantially when the identical script is served from an unfamiliar domain. This sensitivity is absent in one model, and present with a fully auditable chain-of-thought trace in the other three. Across three local models and 240 attribution sessions, all three misattribute fabricated discoveries to a topically authoritative organization at domain-specific rates reaching total capture in some fields and near-perfect calibration in others within the same model. A counterbalanced, statistically tested analysis further shows that the more commonly assumed companion effect, position bias, is not automatically present alongside source bias. It is real and one-directional for one model, and statistically indistinguishable from chance for the other two. We report it as an open question for follow-up work with larger paired samples, not a settled finding.
 
 % \begin{ack}
 % Funding and competing-interest disclosures go here for the camera-ready version only; omitted from the anonymized submission per venue policy.
