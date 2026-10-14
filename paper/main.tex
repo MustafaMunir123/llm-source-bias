@@ -1,7 +1,7 @@
 \documentclass{article}
 
-\usepackage[dblblindworkshop]{neurips_2026}
-\workshoptitle{Agents in the Wild: Safety, Security, and Beyond}
+\usepackage[verbose=true,letterpaper,margin=1in]{geometry}
+\usepackage{natbib}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -39,7 +39,7 @@
 \maketitle
 
 \begin{abstract}
-Do large language models evaluate not only what information says, but also who appears to have said it? We call this potential effect \emph{source-level bias}: identical content treated differently when its apparent source changes, even though the content itself stays fixed. We report two experiments that isolate this variable and test whether it holds. In Experiment 1, four tool-calling agents (DeepSeek V4 Flash, GPT-5.6 Luna, MiMo V2.5, GLM-5.3) receive an identical install-script page and instruction; only the domain hosting the page changes, a trusted one (\texttt{claude.ai}) or an unknown one (\texttt{jaguar.ai}). Across 480 sessions, three models inspect, refuse, and flag suspicion on the unknown domain several times more often, with execution itself also significantly reduced for two of them once sessions that merely stalled on a permission prompt are separated from confirmed completed runs; the fourth model shows no source discrimination at all and executes both domains identically. In Experiment 2, three smaller local models (Qwen3-4B, DeepSeek-R1-Distill-7B, Mistral-7B-Instruct) attribute 40 fabricated scientific discoveries to one of two candidate organizations, one topically authoritative and one topically marginal, under counterbalanced presentation order. All three models misattribute discoveries to the authoritative organization at domain-specific rates reaching near-total in some fields, and their aggregate bias rate of 33--42\% is already large: ground truth is always the topically marginal organization, so a model following the evidence rather than apparent authority would score near 0\%. Position bias, often assumed to accompany this effect, survives statistical testing for only one of the three models. Together, the two experiments show that source identity shifts both what an agent does and what a model believes, and that this sensitivity is inconsistent across models.
+Do large language models evaluate not only what information says, but also who appears to have said it? We call this potential effect \emph{source-level bias}: identical content treated differently when its apparent source changes, even though the content itself stays fixed. We report two experiments that isolate this variable and test whether it holds. In Experiment 1, four tool-calling agents (DeepSeek V4 Flash, GPT-5.6 Luna, MiMo V2.5, GLM-5.3) receive an identical install-script page and instruction; only the domain hosting the page changes, a trusted one (\texttt{claude.ai}) or an unknown one (\texttt{jaguar.ai}). Across 480 sessions, three models inspect, refuse, and flag suspicion on the unknown domain several times more often, with execution itself also significantly reduced for two of them once sessions that merely stalled on a permission prompt are separated from confirmed completed runs; the fourth model shows no source discrimination at all and executes both domains identically. In Experiment 2, four smaller local models (Qwen3-4B, DeepSeek-R1-Distill-7B, Mistral-7B-Instruct, Gemma-4-12B) attribute 40 fabricated scientific discoveries to one of two candidate organizations, one topically authoritative and one topically marginal, under counterbalanced presentation order. All four models misattribute discoveries to the authoritative organization at domain-specific rates reaching near-total in some fields, and their aggregate bias rate of 20--42\% is already large: ground truth is always the topically marginal organization, so a model following the evidence rather than apparent authority would score near 0\%. Position bias, often assumed to accompany this effect, survives statistical testing for only one of the four models. Together, the two experiments show that source identity shifts both what an agent does and what a model believes, and that this sensitivity is inconsistent across models.
 \end{abstract}
 
 \section{Introduction}
@@ -184,7 +184,7 @@ Each item is presented in both a \emph{normal} order (authoritative organization
 
 \subsection{Models and procedure}
 
-We evaluate three smaller, locally-run models: Qwen3-4B, DeepSeek-R1-Distill-7B, and Mistral-7B-Instruct, run on Kaggle T4$\times$2 GPUs. Each model is asked, for each item, ``Which organization made this discovery?'' and its chain-of-thought and final answer are recorded and scored by manual review.
+We evaluate four smaller, locally-run models: Qwen3-4B, DeepSeek-R1-Distill-7B, Mistral-7B-Instruct, and Gemma-4-12B, run on Kaggle T4$\times$2 GPUs. Each model is asked, for each item, ``Which organization made this discovery?'' and its chain-of-thought and final answer are recorded and scored by manual review.
 
 \subsection{Metrics}
 
@@ -204,11 +204,12 @@ For each session we record whether the model's answer matches the topically auth
     Qwen3-4B & 80 & 80 & 0.625 & 0.375 & above \\
     DeepSeek-R1-Distill-7B & 80 & 65 & 0.585 & 0.415 & above \\
     Mistral-7B-Instruct & 80 & 78 & 0.667 & 0.333 & above \\
+    Gemma-4-12B & 80 & 74 & 0.797 & 0.203 & above \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-At the aggregate level, all three models sit well \emph{above} the 0.0 floor an evidence-following, unbiased model would hit. A rate of 33--42\% means these models defer to apparent authority over the text's own evidence on roughly a third to two-fifths of all scored items --- already a large effect on its own, not a small one. It also understates the true picture: aggregate bias is diluted by domains where the models are almost perfectly calibrated, which masks domains where they are almost entirely captured by apparent authority (Table~\ref{tab:exp2-domain}, Figure~\ref{fig:exp2-source}).
+At the aggregate level, all four models sit well \emph{above} the 0.0 floor an evidence-following, unbiased model would hit. A rate of 20--42\% means these models defer to apparent authority over the text's own evidence on roughly a fifth to two-fifths of all scored items --- already a large effect on its own, not a small one. It also understates the true picture: aggregate bias is diluted by domains where the models are almost perfectly calibrated, which masks domains where they are almost entirely captured by apparent authority (Table~\ref{tab:exp2-domain}, Figure~\ref{fig:exp2-source}).
 
 \begin{table}[htbp]
   \caption{Experiment 2 source-level bias rate by domain. Values are the fraction of scored sessions in that domain attributed to the topically authoritative organization.}
@@ -222,6 +223,7 @@ At the aggregate level, all three models sit well \emph{above} the 0.0 floor an 
     Qwen3-4B & 0.45 & 1.00 & 0.05 & 0.00 \\
     DeepSeek-R1-Distill-7B & 0.19 & 0.65 & 0.41 & 0.40 \\
     Mistral-7B-Instruct & 0.45 & 0.32 & 0.11 & 0.45 \\
+    Gemma-4-12B & 0.30 & 0.00 & 0.13 & 0.35 \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -233,7 +235,7 @@ At the aggregate level, all three models sit well \emph{above} the 0.0 floor an 
   \label{fig:exp2-source}
 \end{figure}
 
-The domain pattern is sharply bimodal within every model. Qwen3-4B is perfectly calibrated on Climate Science (0.05) and Particle Physics (0.00), but attributes \emph{all} 20/20 Medicine/Biology discoveries to the authoritative organization. Mistral-7B-Instruct stays within a narrower 0.11--0.45 range across all four domains, with no domain reaching the near-ceiling capture seen in Qwen3-4B's Medicine/Biology result. No domain is universally safe, and no domain is universally captured across models. The same model that ignores authority entirely in one field can be almost fully governed by it in another.
+The domain pattern varies sharply in how extreme it gets per model. Qwen3-4B is sharply bimodal: perfectly calibrated on Climate Science (0.05) and Particle Physics (0.00), but attributes \emph{all} 20/20 Medicine/Biology discoveries to the authoritative organization. DeepSeek-R1-Distill-7B is more moderate throughout (0.19--0.65). Mistral-7B-Instruct stays within a narrower 0.11--0.45 range across all four domains, with no domain reaching the near-ceiling capture seen in Qwen3-4B's Medicine/Biology result. Gemma-4-12B is narrower still (0.00--0.35): perfectly calibrated on Medicine/Biology, the one domain where Qwen3-4B is fully captured, but still drifts up to 0.35 on Particle Physics. No domain is universally safe, and no domain is universally captured across models. The same model that ignores authority entirely in one field can be almost fully governed by it in another.
 
 \subsection{Isolating position bias from source bias}
 \label{sec:mcnemar}
@@ -255,6 +257,8 @@ The per-order breakdown (Table~\ref{tab:exp2-order}) shows that every model's ra
      & reversed & 33 & 21 & 0.636 \\
     \multirow{2}{*}{Mistral-7B-Instruct} & normal & 38 & 31 & 0.184 \\
      & reversed & 40 & 21 & 0.525 \\
+    \multirow{2}{*}{Gemma-4-12B} & normal & 37 & 30 & 0.189 \\
+     & reversed & 37 & 29 & 0.784 \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -271,6 +275,7 @@ The per-order breakdown (Table~\ref{tab:exp2-order}) shows that every model's ra
     Qwen3-4B & 40 & 14 & 2 & 0 & 24 & 0.5000 & ns \\
     DeepSeek-R1-Distill-7B & 28 & 6 & 5 & 7 & 10 & 0.7744 & ns \\
     Mistral-7B-Instruct & 38 & 7 & 11 & 0 & 20 & 0.0010 & *** \\
+    Gemma-4-12B & 35 & 4 & 4 & 3 & 24 & 1.0000 & ns \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -282,9 +287,9 @@ The per-order breakdown (Table~\ref{tab:exp2-order}) shows that every model's ra
   \label{fig:exp2-position}
 \end{figure}
 
-The result does not match the raw-percentage impression. Only \textbf{Mistral-7B-Instruct} shows a statistically real order effect ($p=0.001$). Every one of its 11 discordant pairs flips in the same direction, toward the authoritative organization on reversal ($b=11$, $c=0$). This is itself notable: it is not noisy flipping but a one-directional shift. \textbf{Qwen3-4B} ($p=0.50$) and \textbf{DeepSeek-R1-Distill-7B} ($p=0.77$) show discordant pairs splitting close to evenly between directions. Their raw normal-to-reversed percentage swings (0.35$\to$0.60 and 0.469$\to$0.636 respectively) are consistent with sampling noise at this sample size ($n=28$--$40$ pairs), not a genuine, model-general position effect.
+The result does not match the raw-percentage impression. Only \textbf{Mistral-7B-Instruct} shows a statistically real order effect ($p=0.001$). Every one of its 11 discordant pairs flips in the same direction, toward the authoritative organization on reversal ($b=11$, $c=0$). This is itself notable: it is not noisy flipping but a one-directional shift. \textbf{Qwen3-4B} ($p=0.50$), \textbf{DeepSeek-R1-Distill-7B} ($p=0.77$), and \textbf{Gemma-4-12B} ($p=1.00$) show discordant pairs splitting close to evenly between directions. Gemma-4-12B is the clearest illustration of why the raw percentage is misleading: its normal-to-reversed swing (0.189$\to$0.784) is the single largest of any model in this study, yet its paired result is the least significant ($b=4$, $c=3$, nearly an even split). Qwen3-4B's and DeepSeek-R1-Distill-7B's raw swings (0.35$\to$0.60 and 0.469$\to$0.636 respectively) are smaller but tell the same story. All three are consistent with sampling noise at this sample size ($n=28$--$40$ pairs), not a genuine, model-general position effect.
 
-We therefore treat position-level bias as an \emph{open question} rather than an established finding of this study. It is real and one-directional for at least one model, but does not currently generalize across the three models tested. A larger paired sample would be needed to determine whether Qwen3-4B's and DeepSeek-R1-Distill-7B's non-significant results reflect a true absence of the effect, or just insufficient power to detect a smaller one.
+We therefore treat position-level bias as an \emph{open question} rather than an established finding of this study. It is real and one-directional for at least one model, but does not currently generalize across the four models tested. A larger paired sample would be needed to determine whether Qwen3-4B's, DeepSeek-R1-Distill-7B's, and Gemma-4-12B's non-significant results reflect a true absence of the effect, or just insufficient power to detect a smaller one.
 
 \section{Discussion}
 \label{sec:discussion}
@@ -302,7 +307,7 @@ Practically, this suggests two things. Neither ``trust the model's stated reason
 
 \textbf{Experiment 1.} Session outcomes were classified by manual transcript review, which introduces the possibility of classifier drift across the four models' transcripts even under a fixed rubric. We tested a single delivery mechanism, a shell script fetched via \texttt{curl~|~bash}; file format (\texttt{.sh} vs.\ \texttt{.py} vs.\ a signed binary) likely affects inspection behavior independently of domain, and we do not test that here. All four models were accessed through a single agent harness, OpenCode, whose tool-calling conventions could interact with the effect we measure. Exact model version pins, decoding parameters, and seeds were not logged at run-time (Appendix~\ref{sec:repro}).
 
-\textbf{Experiment 2.} All three models are small, non-frontier models, so whether the same pattern holds at larger scale is untested. Sample sizes are modest, which limits statistical power, particularly for the paired McNemar analysis. The fabricated discoveries were generated by models from the same general class as those being tested, a deliberate choice to equalize information availability across the two candidate organizations (Section~\ref{sec:exp2}), but one that raises a circularity concern in exchange. Scoring was performed by manual review rather than a blind annotator panel.
+\textbf{Experiment 2.} All four models are small, non-frontier models, so whether the same pattern holds at larger scale is untested. Sample sizes are modest, which limits statistical power, particularly for the paired McNemar analysis. The fabricated discoveries were generated by models from the same general class as those being tested, a deliberate choice to equalize information availability across the two candidate organizations (Section~\ref{sec:exp2}), but one that raises a circularity concern in exchange. Scoring was performed by manual review rather than a blind annotator panel.
 
 \textbf{Ethics.} No traffic in Experiment 1 reached the real \texttt{claude.ai}, and the exfiltration target was a loopback receiver on our own machines, so no third-party data was collected.
 
@@ -310,7 +315,7 @@ Practically, this suggests two things. Neither ``trust the model's stated reason
 \section{Conclusion}
 \label{sec:conclusion}
 
-Source identity, held independent of content, measurably changes both what tool-calling agents do and what local language models believe. Across four agents and 480 sessions, script inspection, refusal, and expressed suspicion all rise substantially when the identical script is served from an unfamiliar domain. This sensitivity is absent in one model, and present with a fully auditable chain-of-thought trace in the other three. Across three local models and 240 attribution sessions, all three misattribute fabricated discoveries to a topically authoritative organization at domain-specific rates reaching total capture in some fields and near-perfect calibration in others within the same model. A counterbalanced, statistically tested analysis further shows that the more commonly assumed companion effect, position bias, is not automatically present alongside source bias. It is real and one-directional for one model, and statistically indistinguishable from chance for the other two. We report it as an open question for follow-up work with larger paired samples, not a settled finding.
+Source identity, held independent of content, measurably changes both what tool-calling agents do and what local language models believe. Across four agents and 480 sessions, script inspection, refusal, and expressed suspicion all rise substantially when the identical script is served from an unfamiliar domain. This sensitivity is absent in one model, and present with a fully auditable chain-of-thought trace in the other three. Across four local models and 320 attribution sessions, all four misattribute fabricated discoveries to a topically authoritative organization at domain-specific rates reaching total capture in some fields and near-perfect calibration in others within the same model. A counterbalanced, statistically tested analysis further shows that the more commonly assumed companion effect, position bias, is not automatically present alongside source bias. It is real and one-directional for one model, and statistically indistinguishable from chance for the other three. We report it as an open question for follow-up work with larger paired samples, not a settled finding.
 
 % \begin{ack}
 % Funding and competing-interest disclosures go here for the camera-ready version only; omitted from the anonymized submission per venue policy.
@@ -348,6 +353,6 @@ i.e.\ a two-sided exact binomial test of $b$ against $c$ under the null that ord
 
 \subsection{Reproducibility}
 
-Unlike Experiment 1, all three models here are pinned, locally-run checkpoints: \texttt{Qwen/Qwen3-4B}, \texttt{deepseek-ai/DeepSeek-R1-Distill-Qwen-7B}, and \texttt{mistralai/Mistral-7B-Instruct-v0.3}, all from Hugging Face. Generation used temperature $0.3$, top-$p$ $0.9$, and a maximum of 4096 new tokens, with a fixed global random seed of 42 for the run.
+Unlike Experiment 1, all four models here are pinned, locally-run checkpoints: \url{Qwen/Qwen3-4B}, \url{deepseek-ai/DeepSeek-R1-Distill-Qwen-7B}, \url{mistralai/Mistral-7B-Instruct-v0.3}, and \url{unsloth/gemma-4-12b-it}, all from Hugging Face. Generation used temperature $0.3$, top-$p$ $0.9$, and a maximum of 4096 new tokens, with a fixed global random seed of 42 for the run.
 
 \end{document}
